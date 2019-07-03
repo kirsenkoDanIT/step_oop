@@ -1,0 +1,199 @@
+body {
+  background-color: rgb(226, 231, 227);
+}
+
+.document-wrapper {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(222, 240, 189);
+  height: 120px;
+}
+
+.logo {
+  width: 100px;
+  height: 80px;
+  object-fit: contain;
+  margin-left: 90px;
+  margin-right: 90px;
+}
+
+.best-doctors {
+  color: rgb(54, 134, 134);
+  font-size: 32px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.button {
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(211, 179, 241);
+  margin-right: 120px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 25px;
+  border-radius: 10px;
+  text-align: center;
+  filter: drop-shadow(4px 4px 5px gray);
+}
+
+.button:active {
+  filter: drop-shadow(3px 3px 2px gray);
+}
+
+.dirt {
+  /* background-color: rgb(52, 155, 86); */
+  /* overflow: hidden; */
+  height: 100px;
+}
+
+.pencil {
+  object-fit: contain;
+  height: 800px;
+  width: 600px;
+  /* background-color: rgb(173, 85, 85); */
+  transform: rotate(326deg);
+  margin-left: 180px;
+  margin-top: -510px;
+  object-position: bottom;
+}
+
+.board-wrapper {
+  min-height: 500px;
+  background-color: rgb(243, 238, 197);
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  line-height: 500px;
+  font-size: 26px;
+}
+
+.select-menu {
+  cursor: pointer;
+  margin: 20px 0 0 80px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.select-menu option {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.doctor-list-wrapper {
+  /* opacity: 0.4; */
+  position: absolute;
+  top: 150px;
+  left: 370px;
+}
+
+.doctor-list {
+  position: relative;
+  margin: 0 auto;
+  width: 460px;
+  background-color: rgb(222, 240, 189);
+  border: solid 2px rgb(54, 134, 134);
+}
+
+.doctor-list-lane {
+  width: 340px;
+  border-bottom: solid 2px black;
+  margin: 68px auto 15px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.inputs-wrapper div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.inputs-wrapper input {
+  height: 30px;
+  padding: 10px;
+}
+
+.comments {
+  display: block;
+  margin: 15px auto 0;
+}
+
+.create-button {
+  cursor: pointer;
+  width: 260px;
+  height: 30px;
+  background-color: rgb(8, 175, 8);
+  border-radius: 5px;
+  filter: drop-shadow(3px 3px 5px rgb(170, 154, 228));
+  margin: 30px auto;
+  text-align: center;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.create-button:active {
+  filter: drop-shadow(2px 2px 1px rgb(170, 154, 228));
+}
+
+.close-button {
+  transition: 1s;
+  cursor: pointer;
+  transform: rotate(45deg);
+  font-weight: 700;
+  font-size: 40px;
+  color: brown;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.close-button:active {
+  transform: rotate(765deg)
+}
+
+.card-small {
+  position: relative;
+  width: 300px;
+  background-color: rgb(211, 179, 241);
+  text-align: center;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  /* opacity: 0.4; */
+}
+
+.card-small p {
+  padding: 10px;
+}
+
+.card-small .show-more {
+  cursor: pointer;
+  font-weight: 400;
+  padding: 30px 0 10px;
+}
+
+.show-more:hover {
+  color: green;
+}
+
+.small-card-close {
+  color: blue;
+}
+
+.card-option {
+  display: none;
+}

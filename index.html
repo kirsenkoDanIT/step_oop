@@ -1,12 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
 </head>
+
 <body>
-<script src="js/script.js"></script></body>
+  <div class="document-wrapper">
+    <header>
+      <div class="header-box">
+        <img class="logo" src="./img/logo.png" alt="">
+        <p class="best-doctors">the best doctors ever</p>
+        <div class="button">Створити заявку</div>
+      </div>
+
+    </header>
+    <div class="dirt">
+      <img src="./img/1.png" alt="" class="pencil">
+
+    </div>
+    <section class="board-wrapper">
+      <div class="board">no items have been added</div>
+
+    </section>
+    <div class="doctor-list-wrapper">
+      <div class="doctor-list">
+        <select name="doctor" class="select-menu" id="">
+          <option>Кардіолог</option>
+          <option>Стоматолог</option>
+          <option>Терапевт</option>
+        </select>
+        <div class="doctor-list-lane"></div>
+        <div class="inputs-wrapper">
+          <div>
+            <p>мета візиту</p>
+            <input type="text">
+          </div>
+          <div>
+            <p>звичайний тиск</p>
+            <input type="text">
+          </div>
+          <div>
+            <p>індекс маси тіла</p>
+            <input type="text">
+          </div>
+          <div>
+            <p>одужані захворювання сердцево-судинної системи</p>
+            <input type="text">
+          </div>
+          <div>
+            <p>вік</p>
+            <input type="text">
+          </div>
+          <div>
+            <p>ПІБ</p>
+            <input type="text">
+          </div>
+          <div>
+            <p>дата останнього відвідування</p>
+            <input type="text">
+          </div>
+        </div>
+        <textarea maxlength="400" placeholder="Write your comments pls" class="comments" name="comment" cols="40" rows="4"></textarea>
+
+        <div class="create-button">Створити</div>
+        <div class="close-button">+</div>
+      </div>
+    </div>
+    <div class="card-small">
+      <p class="card-name">Sraka-Bairaka</p>
+      <p class="card-doctor">Педіатр</p>
+      <div class="card-option">
+        <p class="card-age"></p>
+        <p class="option-1"></p>
+        <p class="option-2"></p>
+        <p class="option-3"></p>
+        <p class="option-4"></p>
+        <p class="option-5"></p>
+        <p class="option-6"></p>
+      </div>
+      <p class="show-more">Показати більше</p>
+      <p class="close-button small-card-close">+</p>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+
 </html>

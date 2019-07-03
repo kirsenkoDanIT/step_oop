@@ -125,13 +125,14 @@ body {
 .input-lane {
   padding: 10px;
 }
+
 .input-lane input {
   height: 30px;
 }
 
 .flex-style {
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .comments {

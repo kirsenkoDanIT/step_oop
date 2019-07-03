@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="page-header">
+      <div class="logo"><img src="img/logo.png" alt="logo" class="logo__img"></div>
+      <button type="button" class="btn">Create visit</button>
+      <form class="form">
+        <button class="close-btn" type="button"></button>
+        <select id="doctor-select">
+          <option value="" data-name='cardiologist'>Кардиолог</option>
+          <option value="" data-name="dentist">Стоматолог</option>
+          <option value="" data-name="therapist">Терапевт</option>
+        </select>
+        <p><label>ФИО пациента: <input id="name" required></label></p>
+        <p><label>Цель визита: <input id="purpose" required></label></p>
+        <p><label>Дата визита: <input id="date" required></label></p>
+        <p data-name="cardiologist"><label>Обычное давление: <input id="pressure" required></label></p>
+        <p data-name="cardiologist"><label>Индекс массы тела: <input id="mass-index" required></label></p>
+        <p data-name="cardiologist"><label>Перенесенные заболевания: <input id="diseases" required></label></p>
+        <p><textarea maxlength="400" name="text"></textarea></p>
+        <button type="submit" class="btn">Create</button>
+      </form>
+    </header>
+    <main class="main-content">
+      <h2 class="empty-title">No items have been added</h2>
+    </main>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

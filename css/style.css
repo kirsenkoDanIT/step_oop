@@ -93,7 +93,7 @@ body {
 }
 
 .doctor-list-wrapper {
-  /* opacity: 0.4; */
+  /* opacity: 0.2; */
   position: absolute;
   top: 150px;
   left: 370px;
@@ -122,9 +122,16 @@ body {
   padding: 10px;
 }
 
-.inputs-wrapper input {
-  height: 30px;
+.input-lane {
   padding: 10px;
+}
+.input-lane input {
+  height: 30px;
+}
+
+.flex-style {
+display: flex;
+justify-content: space-between;
 }
 
 .comments {
@@ -133,6 +140,8 @@ body {
 }
 
 .create-button {
+  display: block;
+  border: none;
   cursor: pointer;
   width: 260px;
   height: 30px;
@@ -141,7 +150,7 @@ body {
   filter: drop-shadow(3px 3px 5px rgb(170, 154, 228));
   margin: 30px auto;
   text-align: center;
-  line-height: 30px;
+  line-height: 25px;
   font-weight: 700;
 }
 

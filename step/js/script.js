@@ -44,10 +44,27 @@ class DentistVisit extends Visit {
     }
 }
 
+function addVisit() {
+    switch (select.options[select.selectedIndex].dataset.name) {
+        case 'cardiologist':
+            // new CardiologistVisit(name.value, date.value, reason.value)
+            form.style.display = 'none'
+            break;
+        case 'dentist':
+            // new DentistVisit(name.value, date.value, reason.value)
+            form.style.display = 'none'
+            break;
+        case 'therapist':
+            // new TherapistVisit(name.value, date.value, reason.value)
+            form.style.display = 'none'
+            break; 
+    }
+}
+
+createNewVisitBtn.addEventListener('click', addVisit)
 
 
-
-openFormBtn.addEventListener('click', (e) => {
+openFormBtn.addEventListener('click', () => {
     form.style.display === 'none' ?
         form.style.display = '' :
         form.style.display = 'none'
@@ -59,13 +76,11 @@ openFormBtn.addEventListener('click', (e) => {
     })
 })
 
-closeBtn.addEventListener('click', (e) => {
+closeBtn.addEventListener('click', () => {
     form.style.display = 'none'
 })
 
-createNewVisitBtn.addEventListener('click', (event) => {
-    event.preventDefault
-})
+
 
 select.addEventListener('change', () => {
     console.log(select.options[select.selectedIndex].dataset.name)

@@ -37,9 +37,3 @@ select.addEventListener('change', () => {
         } else item.style.display = 'none'
     })
 })
-
-// inputs.forEach(item => {
-//     if (!item.dataset.name || item.dataset.name === select.options[select.selectedIndex].dataset.name) {
-//         item.style.display = 'block'
-//     } else item.style.display = 'none'
-// })

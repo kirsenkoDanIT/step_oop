@@ -91,10 +91,27 @@ body {
   min-height: 100vh;
   background-color: #0000002e;
   display: flex;
+  padding: 5px;
+  position: relative;
 }
 
 .empty-title {
   font-size: 30px;
   align-self: center;
   margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.visit-card {
+  padding: 10px;
+  background-color: grey;
+  align-self: flex-start;
+  margin: 5px;
+}
+
+.visit-card p {
+  margin-bottom: 10px;
 }

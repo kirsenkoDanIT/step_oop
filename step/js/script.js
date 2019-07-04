@@ -14,18 +14,37 @@ const select = document.querySelector('#doctor-select')
 let inputWrapper = document.querySelectorAll('.form p')
 const input = document.querySelectorAll('.form input')
 form.style.display = 'none'
+const mainContent = document.querySelector('.main-content')
 
 class Visit {
     constructor(fullName, visitDate, visitReason) {
         this._fullName = fullName
-        this._visitDate = new Date(visitDate)
+        // this._visitDate = new Date(visitDate)
+        this._visitDate = visitDate
         this._visitReason = visitReason
+
+        this._card = document.createElement('article')
+        this._card.className = 'visit-card'
+        let cardContent = `
+        <p>${this._fullName}</p>
+        <p>${this._visitDate}</p>
+        <p>${this._visitReason}</p>`
+
+        this._card.innerHTML = cardContent
+
+        mainContent.appendChild(this._card)
     }
 
     removeVisit() {
 
     }
 }
+
+const visit = new Visit('name', '21-02-19', 'reason')
+const visit2 = new Visit('name2', '21-02-19', 'reason')
+const visit3= new Visit('name3', '21-02-19', 'reason')
+const visit4= new Visit('name4', '21-02-19', 'reason')
+
 
 class TherapistVisit extends Visit {
     constructor() {

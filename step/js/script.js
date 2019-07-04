@@ -40,12 +40,6 @@ class Visit {
     }
 }
 
-const visit = new Visit('name', '21-02-19', 'reason')
-const visit2 = new Visit('name2', '21-02-19', 'reason')
-const visit3 = new Visit('name3', '21-02-19', 'reason')
-const visit4 = new Visit('name4', '21-02-19', 'reason')
-
-
 class TherapistVisit extends Visit {
     constructor() {
 

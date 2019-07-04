@@ -11,7 +11,8 @@ const closeBtn = document.querySelector('.form .close-btn')
 const form = document.querySelector('.form')
 const createNewVisitBtn = document.querySelector('.form .btn')
 const select = document.querySelector('#doctor-select')
-const inputs = document.querySelectorAll('.form p')
+const inputWrapper = document.querySelectorAll('.form p')
+const input = document.querySelectorAll('.form input')
 form.style.display = 'none'
 
 class Visit {
@@ -57,18 +58,19 @@ function addVisit() {
         case 'therapist':
             // new TherapistVisit(name.value, date.value, reason.value)
             form.style.display = 'none'
-            break; 
+            break;
     }
 }
 
 createNewVisitBtn.addEventListener('click', addVisit)
 
 
+
 openFormBtn.addEventListener('click', () => {
     form.style.display === 'none' ?
         form.style.display = '' :
         form.style.display = 'none'
-    inputs.forEach(item => {
+    inputWrapper.forEach(item => {
         if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
             item.style.display = 'block'
         } else
@@ -85,7 +87,7 @@ closeBtn.addEventListener('click', (e) => {
 select.addEventListener('change', () => {
     console.log(select.options[select.selectedIndex].dataset.name)
 
-    inputs.forEach(item => {
+    inputWrapper.forEach(item => {
         if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
             item.style.display = 'block'
         } else item.style.display = 'none'

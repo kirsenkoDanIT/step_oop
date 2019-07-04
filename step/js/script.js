@@ -13,7 +13,7 @@ openFormBtn.addEventListener('click', (e) => {
         form.style.display = '' :
         form.style.display = 'none'
     inputs.forEach(item => {
-        if (!item.dataset.name || item.dataset.name === select.options[select.selectedIndex].dataset.name) {
+        if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
             item.style.display = 'block'
         } else
             item.style.display = 'none'
@@ -32,7 +32,7 @@ select.addEventListener('change', () => {
     console.log(select.options[select.selectedIndex].dataset.name)
 
     inputs.forEach(item => {
-        if (!item.dataset.name || item.dataset.name === select.options[select.selectedIndex].dataset.name) {
+        if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
             item.style.display = 'block'
         } else item.style.display = 'none'
     })

@@ -40,8 +40,8 @@ body {
   min-height: 85vh;
   background-color: #0000002e;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
 }
 
 .form {
@@ -98,4 +98,7 @@ body {
 
 .empty-title {
   font-size: 30px;
+  align-self: center;
+  text-align: center;
+  width: 100%;
 }

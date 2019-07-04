@@ -11,7 +11,7 @@ const closeBtn = document.querySelector('.form .close-btn')
 const form = document.querySelector('.form')
 const createNewVisitBtn = document.querySelector('.form .btn')
 const select = document.querySelector('#doctor-select')
-const inputWrapper = document.querySelectorAll('.form p')
+let inputWrapper = document.querySelectorAll('.form p')
 const input = document.querySelectorAll('.form input')
 form.style.display = 'none'
 
@@ -62,7 +62,18 @@ function addVisit() {
     }
 }
 
-createNewVisitBtn.addEventListener('click', addVisit)
+// createNewVisitBtn.addEventListener('click', addVisit)
+// createNewVisitBtn.addEventListener('click', (e) => {
+//     input.forEach(item => {
+//         if (!item.value) {
+//             item.style.border = '2px solid red'
+//         }
+//     })
+
+//     if ([...input].some(item => !item.value)) {
+//         console.log(item);
+//     }
+// })
 
 
 
@@ -76,6 +87,11 @@ openFormBtn.addEventListener('click', () => {
         } else
             item.style.display = 'none'
     })
+    //   return  inputWrapper = [...inputWrapper].filter(item => {
+    //         return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
+    //     })
+
+    // console.log(inputWrapper);
 })
 
 closeBtn.addEventListener('click', (e) => {
@@ -92,4 +108,10 @@ select.addEventListener('change', () => {
             item.style.display = 'block'
         } else item.style.display = 'none'
     })
+
+    //    return inputWrapper = [...inputWrapper].filter(item => {
+    //         return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
+    //     })
+
+    // console.log(inputWrapper);
 })

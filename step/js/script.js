@@ -42,8 +42,8 @@ class Visit {
 
 const visit = new Visit('name', '21-02-19', 'reason')
 const visit2 = new Visit('name2', '21-02-19', 'reason')
-const visit3= new Visit('name3', '21-02-19', 'reason')
-const visit4= new Visit('name4', '21-02-19', 'reason')
+const visit3 = new Visit('name3', '21-02-19', 'reason')
+const visit4 = new Visit('name4', '21-02-19', 'reason')
 
 
 class TherapistVisit extends Visit {
@@ -82,17 +82,27 @@ function addVisit() {
 }
 
 // createNewVisitBtn.addEventListener('click', addVisit)
-// createNewVisitBtn.addEventListener('click', (e) => {
-//     input.forEach(item => {
-//         if (!item.value) {
-//             item.style.border = '2px solid red'
-//         }
-//     })
+createNewVisitBtn.addEventListener('click', (e) => {
 
-//     if ([...input].some(item => !item.value)) {
-//         console.log(item);
-//     }
-// })
+    let inputName = document.querySelector('#name').value
+    let inputDate = document.querySelector('#date').value
+    let inputReason = document.querySelector('#reason').value
+
+    new Visit(inputName, inputDate, inputReason)
+
+    form.style.display = 'none'
+    // input.forEach(item => {
+    //     if (!item.value) {
+    //         item.style.border = '2px solid red'
+    //     }
+    // })
+
+    // if ([...input].some(item => !item.value)) {
+    //     console.log(item);
+    // }
+
+
+})
 
 
 
@@ -100,17 +110,17 @@ openFormBtn.addEventListener('click', () => {
     form.style.display === 'none' ?
         form.style.display = '' :
         form.style.display = 'none'
-    inputWrapper.forEach(item => {
-        if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
-            item.style.display = 'block'
-        } else
-            item.style.display = 'none'
+    // inputWrapper.forEach(item => {
+    //     if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
+    //         item.style.display = 'block'
+    //     } else
+    //         item.style.display = 'none'
+    // })
+    inputWrapper = [...inputWrapper].filter(item => {
+        return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
     })
-    //   return  inputWrapper = [...inputWrapper].filter(item => {
-    //         return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
-    //     })
 
-    // console.log(inputWrapper);
+    console.log(inputWrapper);
 })
 
 closeBtn.addEventListener('click', (e) => {
@@ -122,15 +132,14 @@ closeBtn.addEventListener('click', (e) => {
 select.addEventListener('change', () => {
     console.log(select.options[select.selectedIndex].dataset.name)
 
-    inputWrapper.forEach(item => {
-        if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
-            item.style.display = 'block'
-        } else item.style.display = 'none'
+    // inputWrapper.forEach(item => {
+    //     if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
+    //         item.style.display = 'block'
+    //     } else item.style.display = 'none'
+    // })
+
+    inputWrapper = [...inputWrapper].filter(item => {
+        return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
     })
-
-    //    return inputWrapper = [...inputWrapper].filter(item => {
-    //         return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
-    //     })
-
-    // console.log(inputWrapper);
+    console.log(inputWrapper);
 })

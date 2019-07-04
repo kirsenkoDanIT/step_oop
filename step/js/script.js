@@ -2,9 +2,9 @@
 
 
 
-const fullName = document.querySelector('#name')
+// const fullName = document.querySelector('#name')
 
-console.log(fullName.value);
+// console.log(fullName.value);
 
 const openFormBtn = document.querySelector('.page-header .btn')
 const closeBtn = document.querySelector('.form .close-btn')

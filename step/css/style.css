@@ -36,13 +36,11 @@ body {
 }
 
 .main-content {
-  margin-top: 1vh;
-  min-height: 85vh;
+  margin-top: 10px;
+  min-height: 800px;
   background-color: #0000002e;
   display: flex;
-  /* align-items: center;
-  justify-content: center; */
-}
+  }
 
 .form {
   position: relative;

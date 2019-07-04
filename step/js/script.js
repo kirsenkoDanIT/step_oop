@@ -105,15 +105,15 @@ openFormBtn.addEventListener('click', () => {
     form.style.display === 'none' ?
         form.style.display = '' :
         form.style.display = 'none'
-    // inputWrapper.forEach(item => {
-    //     if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
-    //         item.style.display = 'block'
-    //     } else
-    //         item.style.display = 'none'
-    // })
-    inputWrapper = [...inputWrapper].filter(item => {
-        return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
+    inputWrapper.forEach(item => {
+        if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
+            item.style.display = 'block'
+        } else
+            item.style.display = 'none'
     })
+    // inputWrapper = [...inputWrapper].filter(item => {
+    //     return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
+    // })
 
     console.log(inputWrapper);
 })
@@ -127,14 +127,14 @@ closeBtn.addEventListener('click', (e) => {
 select.addEventListener('change', () => {
     console.log(select.options[select.selectedIndex].dataset.name)
 
-    // inputWrapper.forEach(item => {
-    //     if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
-    //         item.style.display = 'block'
-    //     } else item.style.display = 'none'
-    // })
-
-    inputWrapper = [...inputWrapper].filter(item => {
-        return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
+    inputWrapper.forEach(item => {
+        if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
+            item.style.display = 'block'
+        } else item.style.display = 'none'
     })
-    console.log(inputWrapper);
+
+    // inputWrapper = [...inputWrapper].filter(item => {
+    //     return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
+    // })
+    // console.log(inputWrapper);
 })

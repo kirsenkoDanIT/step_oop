@@ -53,8 +53,8 @@ body {
   padding: 10px 20px;
   position: fixed;
   left: 50%;
-  top: 20vh;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .form select {

@@ -17,22 +17,35 @@ form.style.display = 'none'
 const mainContent = document.querySelector('.main-content')
 
 class Visit {
-    constructor(fullName, visitDate, visitReason) {
+    constructor(fullName, visitReason) {
         this._fullName = fullName
         // this._visitDate = new Date(visitDate)
-        this._visitDate = visitDate
+        // this._visitDate = visitDate
         this._visitReason = visitReason
         
         this._card = document.createElement('article')
         this._card.className = 'visit-card'
         let cardContent = `
         <p>${this._fullName}</p>
-        <p>${this._visitDate}</p>
-        <p>${this._visitReason}</p>`
-        
-        this._card.innerHTML = cardContent
+        <p>${select.options[select.selectedIndex].value}</p>`
+
+        this._card.innerHTML = cardContent    
         
         mainContent.appendChild(this._card)
+    }
+
+    createShowMore(inputs){
+        let showMore = document.createElement('p')
+        showMore.innerText = 'Показати більше'
+        this._card.appendChild(showMore)
+        showMore.style.cursor = 'pointer'
+        
+        showMore.addEventListener('click', ()=>{
+            showMore.style.display = 'none'
+            inputs.forEach((el)=>{
+                el.style.display= ''
+            })
+        })
     }
 
     removeVisit() {
@@ -53,46 +66,27 @@ class CardiologistVisit extends Visit {
 }
 
 class DentistVisit extends Visit {
-    constructor(fullName, inputDate, lastVisit, reasonVisit, textArea){
-        super()
-        this._fullName = fullName
-        let cardContent = `
-        <p>${this._fullName}</p>
-        <p>Дантист</p>        
-        `
-        this._card.innerHTML = cardContent
-        this._card.style.backgroundColor = 'yellow'
-
-        let showMore = document.createElement('article')
-        showMore.innerText = 'Показати більше'
-        this._card.appendChild(showMore)
-
-        let inputs = [
-        this._date = document.createElement('article'),
-        this._lastVisit = document.createElement('article'),
-        this._reason = document.createElement('article'),
-        this._textArea = document.createElement('article')
-        ]
+    constructor(fullName, inputDate, lastVisit, visitReason, textArea){
+        super(fullName, visitReason)
+        this._card.style.backgroundColor = 'yellow'        
         
-        this._date.innerText = inputDate
+        let inputs = [
+            this._inputDate = document.createElement('p'),
+            this._lastVisit = document.createElement('p'),
+            this._visitReason = document.createElement('p'),
+            this._textArea = document.createElement('p')
+        ] 
+               
+        this._inputDate.innerText = inputDate
         this._lastVisit.innerText = lastVisit
-        this._reason.innerText = reasonVisit
+        this._visitReason.innerText = visitReason
         this._textArea.innerText = textArea
         
         inputs.forEach((el)=>{
             this._card.appendChild(el)
             el.style.display= 'none'
         })
-        
-        showMore.style.cursor = 'pointer'
-
-        showMore.addEventListener('click', ()=>{
-            showMore.style.display = 'none'
-            inputs.forEach((el)=>{
-                el.style.display= ''
-            })
-        })
-
+        this.createShowMore(inputs)
     }
     
 }
@@ -120,13 +114,13 @@ createNewVisitBtn.addEventListener('click', (e) => {
     let inputName = document.querySelector('#name').value
     let inputDate = document.querySelector('#date').value
     let lastVisit = document.querySelector('#last-visit').value
-    let reasonVisit = document.querySelector('#reason').value
+    let visitReason = document.querySelector('#reason').value
     let textArea = document.querySelector('#text-area').value
     let doctorsName = select.options[select.selectedIndex].value
     console.log('doctorsName', doctorsName)
     // let inputReason = document.querySelector('#reason').value
 
-    new DentistVisit(inputName, inputDate, lastVisit, reasonVisit, textArea)
+    new DentistVisit(inputName, inputDate, lastVisit, visitReason, textArea)
 
     form.style.display = 'none'
     // input.forEach(item => {

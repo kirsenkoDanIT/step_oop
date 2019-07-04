@@ -76,8 +76,8 @@ openFormBtn.addEventListener('click', () => {
     })
 })
 
-closeBtn.addEventListener('click', () => {
-    form.style.display = 'none'
+closeBtn.addEventListener('click', (e) => {
+    e.target.parentNode.style.display = 'none'
 })
 
 

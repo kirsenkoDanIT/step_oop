@@ -16,7 +16,7 @@ body {
 
 .page-header {
   display: flex;
-  padding: 20px;
+  padding: 10px 20px;
   align-items: center;
   justify-content: space-between;
   background-color: #0000002e;
@@ -33,13 +33,6 @@ body {
   padding: 10px 20px;
   border-radius: 5px;
   border: 2px solid #000;
-}
-
-.main-content {
-  margin-top: 10px;
-  min-height: 800px;
-  background-color: #0000002e;
-  display: flex;
 }
 
 .form {
@@ -91,6 +84,13 @@ body {
   background-size: cover;
   width: 20px;
   height: 20px;
+}
+
+.main-content {
+  margin-top: 10px;
+  min-height: 100vh;
+  background-color: #0000002e;
+  display: flex;
 }
 
 .empty-title {

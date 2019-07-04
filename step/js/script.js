@@ -86,9 +86,10 @@ createNewVisitBtn.addEventListener('click', (e) => {
 
     let inputName = document.querySelector('#name').value
     let inputDate = document.querySelector('#date').value
-    let inputReason = document.querySelector('#reason').value
+    let doctorsName = select.options[select.selectedIndex].value
+    // let inputReason = document.querySelector('#reason').value
 
-    new Visit(inputName, inputDate, inputReason)
+    new Visit(inputName, inputDate, doctorsName)
 
     form.style.display = 'none'
     // input.forEach(item => {

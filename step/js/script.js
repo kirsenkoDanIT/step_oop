@@ -1,7 +1,6 @@
 'use strict'
 
 
-
 // const fullName = document.querySelector('#name')
 
 // console.log(fullName.value);
@@ -16,6 +15,21 @@ const input = document.querySelectorAll('.form input')
 form.style.display = 'none'
 const mainContent = document.querySelector('.main-content')
 
+if(localStorage.mainContent){
+    mainContent.innerHTML = localStorage.mainContent
+    let cards = document.querySelectorAll('article')    
+    cards.forEach((el)=>{
+        let sm = document.querySelector('.show-more')
+        let inp = document.querySelector('p')
+        console.log('sm', sm)
+        sm.addEventListener('click', ()=>{
+            sm.style.display = 'none'
+            inp.forEach((el)=>{
+                el.style.display= ''
+            })
+        })
+    })
+}
 class Visit {
     constructor(fullName, visitReason) {
         this._fullName = fullName
@@ -36,6 +50,7 @@ class Visit {
 
     createShowMore(inputs){
         let showMore = document.createElement('p')
+        showMore.className = 'show-more'
         showMore.innerText = 'Показати більше'
         this._card.appendChild(showMore)
         showMore.style.cursor = 'pointer'
@@ -121,8 +136,10 @@ createNewVisitBtn.addEventListener('click', (e) => {
     // let inputReason = document.querySelector('#reason').value
 
     new DentistVisit(inputName, inputDate, lastVisit, visitReason, textArea)
-
+    
     form.style.display = 'none'
+    
+        localStorage.setItem('mainContent', mainContent.innerHTML)
     // input.forEach(item => {
     //     if (!item.value) {
     //         item.style.border = '2px solid red'

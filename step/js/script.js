@@ -15,95 +15,118 @@ const input = document.querySelectorAll('.form input')
 form.style.display = 'none'
 const mainContent = document.querySelector('.main-content')
 
-if(localStorage.mainContent){
-    mainContent.innerHTML = localStorage.mainContent
-    let cards = document.querySelectorAll('article')    
-    cards.forEach((el)=>{
-        let sm = document.querySelector('.show-more')
-        let inp = document.querySelector('p')
-        console.log('sm', sm)
-        sm.addEventListener('click', ()=>{
-            sm.style.display = 'none'
-            inp.forEach((el)=>{
-                el.style.display= ''
-            })
-        })
+const lStorage = []
+
+if (localStorage.mainContent) {
+
+    console.log((JSON.parse(localStorage.mainContent)));
+    // console.log(localStorage.mainContent);
+    JSON.parse(localStorage.mainContent).forEach(item =>{
+        
     })
+
+    // let cards = document.querySelectorAll('article')
+    // cards.forEach((el) => {
+    //     let sm = document.querySelector('.show-more')
+    //     let inp = document.querySelectorAll('p')
+    //     console.log('sm', sm)
+    //     sm.addEventListener('click', () => {
+    //         // sm.style.display = 'none'
+    //         inp.forEach((el) => {
+    //             el.style.display = ''
+    //         })
+    //     })
+    // })
 }
 class Visit {
     constructor(fullName, visitReason) {
+        const removeVisit = () => {
+
+            let close = document.createElement('p')
+            close.className = 'close'
+            close.innerText = 'close'
+            this._card.appendChild(close)
+            close.style.cursor = 'pointer'
+
+            close.addEventListener('click', () => {
+                mainContent.removeChild(this._card)
+            })
+        }
+
         this._fullName = fullName
         // this._visitDate = new Date(visitDate)
         // this._visitDate = visitDate
         this._visitReason = visitReason
-        
+
         this._card = document.createElement('article')
         this._card.className = 'visit-card'
         let cardContent = `
+
         <p>${this._fullName}</p>
         <p>${select.options[select.selectedIndex].value}</p>`
 
-        this._card.innerHTML = cardContent    
-        
+        this._card.innerHTML = cardContent
+
+        // this.createShowMore(inputs)
+        removeVisit()
+
         mainContent.appendChild(this._card)
     }
 
-    createShowMore(inputs){
+    createShowMore(inputs) {
         let showMore = document.createElement('p')
         showMore.className = 'show-more'
         showMore.innerText = 'Показати більше'
         this._card.appendChild(showMore)
         showMore.style.cursor = 'pointer'
-        
-        showMore.addEventListener('click', ()=>{
+
+        showMore.addEventListener('click', () => {
             showMore.style.display = 'none'
-            inputs.forEach((el)=>{
-                el.style.display= ''
+            inputs.forEach((el) => {
+                el.style.display = ''
             })
         })
     }
 
-    removeVisit() {
 
-    }
 }
 
 class TherapistVisit extends Visit {
     constructor() {
-        
+
     }
 }
 
 class CardiologistVisit extends Visit {
     constructor() {
-        
+
     }
 }
 
 class DentistVisit extends Visit {
-    constructor(fullName, inputDate, lastVisit, visitReason, textArea){
+    constructor(fullName, inputDate, lastVisit, visitReason, textArea) {
         super(fullName, visitReason)
-        this._card.style.backgroundColor = 'yellow'        
-        
+        this._card.style.backgroundColor = 'yellow'
+
         let inputs = [
             this._inputDate = document.createElement('p'),
             this._lastVisit = document.createElement('p'),
             this._visitReason = document.createElement('p'),
             this._textArea = document.createElement('p')
-        ] 
-               
+        ]
+
         this._inputDate.innerText = inputDate
         this._lastVisit.innerText = lastVisit
         this._visitReason.innerText = visitReason
         this._textArea.innerText = textArea
-        
-        inputs.forEach((el)=>{
+
+        inputs.forEach((el) => {
             this._card.appendChild(el)
-            el.style.display= 'none'
+            el.style.display = 'none'
         })
-        this.createShowMore(inputs)
+
     }
-    
+
 }
 
 function addVisit() {
@@ -126,20 +149,24 @@ function addVisit() {
 // createNewVisitBtn.addEventListener('click', addVisit)
 createNewVisitBtn.addEventListener('click', (e) => {
 
-    let inputName = document.querySelector('#name').value
-    let inputDate = document.querySelector('#date').value
-    let lastVisit = document.querySelector('#last-visit').value
-    let visitReason = document.querySelector('#reason').value
-    let textArea = document.querySelector('#text-area').value
-    let doctorsName = select.options[select.selectedIndex].value
-    console.log('doctorsName', doctorsName)
+    // let inputName = document.querySelector('#name').value
+    // let inputDate = document.querySelector('#date').value
+    // let lastVisit = document.querySelector('#last-visit').value
+    // let visitReason = document.querySelector('#reason').value
+    // let textArea = document.querySelector('#text-area').value
+    // let doctorsName = select.options[select.selectedIndex].value
+    // console.log('doctorsName', doctorsName)
     // let inputReason = document.querySelector('#reason').value
 
-    new DentistVisit(inputName, inputDate, lastVisit, visitReason, textArea)
-    
+    const options = []
+
+    let visit = new DentistVisit(inputName, inputDate, lastVisit, visitReason, textArea)
+    console.log(visit);
+
+    lStorage.push(visit)
     form.style.display = 'none'
-    
-        localStorage.setItem('mainContent', mainContent.innerHTML)
+    console.log(lStorage);
+    localStorage.setItem('mainContent', JSON.stringify(lStorage))
     // input.forEach(item => {
     //     if (!item.value) {
     //         item.style.border = '2px solid red'

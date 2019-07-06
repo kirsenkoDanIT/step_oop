@@ -146,39 +146,39 @@ function addVisit() {
     }
 }
 
-// createNewVisitBtn.addEventListener('click', addVisit)
-createNewVisitBtn.addEventListener('click', (e) => {
+createNewVisitBtn.addEventListener('click', addVisit)
+// createNewVisitBtn.addEventListener('click', (e) => {
 
-    // let inputName = document.querySelector('#name').value
-    // let inputDate = document.querySelector('#date').value
-    // let lastVisit = document.querySelector('#last-visit').value
-    // let visitReason = document.querySelector('#reason').value
-    // let textArea = document.querySelector('#text-area').value
-    // let doctorsName = select.options[select.selectedIndex].value
-    // console.log('doctorsName', doctorsName)
-    // let inputReason = document.querySelector('#reason').value
+//     // let inputName = document.querySelector('#name').value
+//     // let inputDate = document.querySelector('#date').value
+//     // let lastVisit = document.querySelector('#last-visit').value
+//     // let visitReason = document.querySelector('#reason').value
+//     // let textArea = document.querySelector('#text-area').value
+//     // let doctorsName = select.options[select.selectedIndex].value
+//     // console.log('doctorsName', doctorsName)
+//     // let inputReason = document.querySelector('#reason').value
 
-    const options = []
+//     const options = []
 
-    let visit = new DentistVisit(inputName, inputDate, lastVisit, visitReason, textArea)
-    console.log(visit);
+//     let visit = new DentistVisit(inputName, inputDate, lastVisit, visitReason, textArea)
+//     console.log(visit);
 
-    lStorage.push(visit)
-    form.style.display = 'none'
-    console.log(lStorage);
-    localStorage.setItem('mainContent', JSON.stringify(lStorage))
-    // input.forEach(item => {
-    //     if (!item.value) {
-    //         item.style.border = '2px solid red'
-    //     }
-    // })
+//     lStorage.push(visit)
+//     form.style.display = 'none'
+//     console.log(lStorage);
+//     localStorage.setItem('mainContent', JSON.stringify(lStorage))
+//     // input.forEach(item => {
+//     //     if (!item.value) {
+//     //         item.style.border = '2px solid red'
+//     //     }
+//     // })
 
-    // if ([...input].some(item => !item.value)) {
-    //     console.log(item);
-    // }
+//     // if ([...input].some(item => !item.value)) {
+//     //     console.log(item);
+//     // }
 
 
-})
+// })
 
 
 

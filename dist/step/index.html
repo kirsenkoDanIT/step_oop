@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="page-header">
+      <div class="page-header__logo"><img src="img/logo.png" alt="logo" class="page-header__img"></div>
+      <button type="button" class="page-header__btn btn">Записаться на прием</button>
+      <form class="form">
+        <button class="form__close-btn close-btn" type="button"></button>
+        <select class="form__select" id="doctor-select">
+          <option class="form__option" value="Кардиолог" data-name='cardiologist'>Кардиолог</option>
+          <option class="form__option" value="Стоматолог" data-name="dentist">Стоматолог</option>
+          <option class="form__option" value="Терапевт" data-name='therapist'>Терапевт</option>
+        </select>
+        <p class="form__input-wrapper"><label class="form__label">ФИО пациента: <input class="form__input" id="name"
+              value="John Doe"></label></p>
+        <p class="form__input-wrapper" data-name="cardiologist therapist"><label class="form__label">Возраст: <input
+              id="age"></label></p>
+        <p class="form__input-wrapper"><label class="form__label">Цель визита: <input class="form__input" id="reason"
+              value="Session"></label></p>
+        <p class="form__input-wrapper"><label class="form__label">Дата визита: <input class="form__input"
+              id="visit-date" value="21-01-2019"></label></p>
+        <p class="form__input-wrapper" data-name="dentist"><label class="form__label">Дата последнего посещения: <input
+              class="form__input" id="last-visit"></label></p>
+        <p class="form__input-wrapper" data-name="cardiologist"><label class="form__label">Обычное давление: <input
+              class="form__input" id="pressure"></label></p>
+        <p class="form__input-wrapper" data-name="cardiologist"><label class="form__label">Индекс массы тела: <input
+              class="form__input" id="mass-index"></label></p>
+        <p class="form__input-wrapper" data-name="cardiologist"><label class="form__label">Перенесенные заболевания:
+            <input class="form__input" id="diseases"></label></p>
+        <p class="form__input-wrapper"><textarea class="form__textarea" maxlength="400" name="text"></textarea></p>
+        <button type="button" class="form__btn btn">Создать</button>
+      </form>
+    </header>
+    <main class="main-content">
+      <h2 class="main-content__title">No items have been added</h2>
+    </main>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

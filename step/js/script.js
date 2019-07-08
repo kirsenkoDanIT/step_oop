@@ -57,7 +57,7 @@ class Visit {
         this._close.addEventListener('click', () => {
             this._card.remove()
         })
-
+        
         this._card.appendChild(this._close)
 
         this._options.forEach(item => {
@@ -156,19 +156,19 @@ function addVisit() {
         switch (selectedOption.dataset.name) {
 
             case 'cardiologist':
-                new CardiologistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, pressure.value, diseases.value)
+                new CardiologistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, pressure.value, diseases.value, textarea.value)
                 form.classList.toggle('form--hidden')
                 console.log(mainContent.childNodes);
 
                 break;
             case 'dentist':
-                new DentistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value)
+                new DentistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value, textarea.value)
                 form.classList.toggle('form--hidden')
                 console.log(mainContent);
                 break;
 
             case 'therapist':
-                new TherapistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value)
+                new TherapistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, textarea.value)
                 form.classList.toggle('form--hidden')
                 console.log(mainContent);
                 break;

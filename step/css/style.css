@@ -16,26 +16,26 @@ body {
 
 .page-header {
   display: flex;
-  padding: 10px 20px;
+  padding: 20px;
   align-items: center;
   justify-content: space-between;
   background-color: #0000002e;
 }
 
-.logo__img {
+.page-header__img {
   width: 100px;
   height: auto;
 }
 
 .btn {
   outline: none;
-  margin: 0;
   padding: 10px 20px;
   border-radius: 5px;
   border: 2px solid #000;
 }
 
 .form {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,25 +51,30 @@ body {
   z-index: 100;
 }
 
-.form select {
+.form--hidden{
+  display: none;
+}
+
+.form__select {
   margin-bottom: 20px;
 }
 
-.form p {
+.form__input-wrapper {
   width: 100%;
-  margin-bottom: 10px;
+  padding: 5px 0;
 }
 
-.form label {
+.form__label {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.form textarea {
+.form__textarea {
   width: 100%;
-  height: 120px;
+  height: 150px;
   resize: none;
+  margin-bottom: 20px;
 }
 
 .close-btn {
@@ -88,31 +93,21 @@ body {
 }
 
 .main-content {
+  position: relative;
   margin-top: 10px;
   min-height: 100vh;
   background-color: #0000002e;
-  display: flex;
-  padding: 5px;
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 100px;
+  grid-gap: 10px;
+  padding: 10px;
 }
 
-.empty-title {
+.main-content__title {
   font-size: 30px;
-  align-self: center;
-  margin: 0 auto;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%)
-}
-
-.visit-card {
-  padding: 10px;
-  background-color: grey;
-  align-self: flex-start;
-  margin: 5px;
-}
-
-.visit-card p {
-  margin-bottom: 10px;
 }

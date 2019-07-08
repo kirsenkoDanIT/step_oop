@@ -1,221 +1,224 @@
 'use strict'
 
+// свойства
 
-// const fullName = document.querySelector('#name')
+const fullName = document.querySelector('#name')
+const visitDate = document.querySelector('#visit-date')
+const visitReason = document.querySelector('#reason')
+const lastVisitDate = document.querySelector('#last-visit')
+const age = document.querySelector('#age')
+const pressure = document.querySelector('#pressure')
+const massIndex = document.querySelector('#mass-index')
+const diseases = document.querySelector('#diseases')
+const textarea = document.querySelector('.form__textarea')
 
-// console.log(fullName.value);
+// элементы
 
-const openFormBtn = document.querySelector('.page-header .btn')
-const closeBtn = document.querySelector('.form .close-btn')
+const openFormBtn = document.querySelector('.page-header__btn')
+const closeFormBtn = document.querySelector('.form__close-btn')
 const form = document.querySelector('.form')
-const createNewVisitBtn = document.querySelector('.form .btn')
-const select = document.querySelector('#doctor-select')
-let inputWrapper = document.querySelectorAll('.form p')
-const input = document.querySelectorAll('.form input')
-form.style.display = 'none'
+const select = document.querySelector('.form__select')
+const createNewVisitBtn = document.querySelector('.form__btn')
+const inputWrapper = document.querySelectorAll('.form__input-wrapper')
 const mainContent = document.querySelector('.main-content')
+const option = document.querySelectorAll('.form__option')
+const inputs = document.querySelectorAll('.form__input')
+const title = document.querySelector('.main-content__title')
 
-const lStorage = []
+// console.log(title);
+// console.log(mainContent.length);
 
-if (localStorage.mainContent) {
+let selectedOption
 
-    console.log((JSON.parse(localStorage.mainContent)));
-    // console.log(localStorage.mainContent);
-    JSON.parse(localStorage.mainContent).forEach(item =>{
-        
-    })
+// классы
 
-    // let cards = document.querySelectorAll('article')
-    // cards.forEach((el) => {
-    //     let sm = document.querySelector('.show-more')
-    //     let inp = document.querySelectorAll('p')
-    //     console.log('sm', sm)
-    //     sm.addEventListener('click', () => {
-    //         // sm.style.display = 'none'
-    //         inp.forEach((el) => {
-    //             el.style.display = ''
-    //         })
-    //     })
-    // })
-}
 class Visit {
-    constructor(fullName, visitReason) {
-        const removeVisit = () => {
+    constructor(name, date, doctor, textarea) {
 
-            let close = document.createElement('p')
-            close.className = 'close'
-            close.innerText = 'close'
-            this._card.appendChild(close)
-            close.style.cursor = 'pointer'
+        this._fullName = name
+        this._visitDate = date
+        this._doctor = doctor
+        this._textarea = textarea
 
-            close.addEventListener('click', () => {
-                mainContent.removeChild(this._card)
-            })
-        }
-
-        this._fullName = fullName
-        // this._visitDate = new Date(visitDate)
-        // this._visitDate = visitDate
-        this._visitReason = visitReason
+        this._options = [this._fullName, this._visitDate, this._doctor]
 
         this._card = document.createElement('article')
         this._card.className = 'visit-card'
-        let cardContent = `
+        this._card.style.minHeight = '100%'
+        this._card.style.position = 'relative'
 
-        <p>${this._fullName}</p>
-        <p>${select.options[select.selectedIndex].value}</p>`
+        this._close = document.createElement('button')
+        this._close.innerText = 'x'
+        this._close.style.position = 'absolute'
+        this._close.style.top = '5px'
+        this._close.style.right = '5px'
 
-        this._card.innerHTML = cardContent
+        this.removeVisit()
 
-        // this.createShowMore(inputs)
-        removeVisit()
+        this._card.appendChild(this._close)
+
+        this._options.forEach(item => {
+            const p = document.createElement('p')
+            p.className = 'article__field'
+            p.innerHTML = item
+            this._card.appendChild(p)
+        })
+
+        this._showMore = document.createElement('button')
+        this._showMore.innerText = 'show more'
+
+        this._card.appendChild(this._showMore)
+
+        // if (this._textarea) {
+        // const p = document.createElement('p')
+        // p.className = 'article__text'
+        // p.innerText = this._textarea
+        // this._card.insertBefore(p, this._showMore)
+        // }
+
+        // console.log(this._textarea)
 
         mainContent.appendChild(this._card)
+
     }
 
-    createShowMore(inputs) {
-        let showMore = document.createElement('p')
-        showMore.className = 'show-more'
-        showMore.innerText = 'Показати більше'
-        this._card.appendChild(showMore)
-        showMore.style.cursor = 'pointer'
-
-        showMore.addEventListener('click', () => {
-            showMore.style.display = 'none'
-            inputs.forEach((el) => {
-                el.style.display = ''
-            })
+    removeVisit() {
+        this._close.addEventListener('click', () => {
+            this._card.remove()
         })
     }
-
-
 }
 
 class TherapistVisit extends Visit {
-    constructor() {
+    constructor(name, date, doctor, textarea, ...args) {
+        super(name, date, doctor, textarea)
+        this._args = args
 
+        this._args.forEach(item => {
+            const p = document.createElement('p')
+            p.className = 'article__field'
+            p.innerHTML = item
+            this._card.insertBefore(p, this._showMore)
+        })
+
+        this._card.style.backgroundColor = 'yellow'
     }
 }
 
 class CardiologistVisit extends Visit {
-    constructor() {
+    constructor(name, date, doctor, textarea, ...args) {
+        super(name, date, doctor, textarea)
+        this._args = args
 
+        this._args.forEach(item => {
+            const p = document.createElement('p')
+            p.className = 'article__field'
+            p.innerText = item
+            this._card.insertBefore(p, this._showMore)
+        })
+
+        this._card.style.backgroundColor = 'blue'
     }
 }
 
 class DentistVisit extends Visit {
-    constructor(fullName, inputDate, lastVisit, visitReason, textArea) {
-        super(fullName, visitReason)
-        this._card.style.backgroundColor = 'yellow'
+    constructor(name, date, doctor, textarea, ...args) {
+        super(name, date, doctor, textarea)
+        this._args = args
 
-        let inputs = [
-            this._inputDate = document.createElement('p'),
-            this._lastVisit = document.createElement('p'),
-            this._visitReason = document.createElement('p'),
-            this._textArea = document.createElement('p')
-        ]
-
-        this._inputDate.innerText = inputDate
-        this._lastVisit.innerText = lastVisit
-        this._visitReason.innerText = visitReason
-        this._textArea.innerText = textArea
-
-        inputs.forEach((el) => {
-            this._card.appendChild(el)
-            el.style.display = 'none'
+        this._args.forEach(item => {
+            const p = document.createElement('p')
+            p.className = 'article__field'
+            p.innerHTML = item
+            this._card.insertBefore(p, this._showMore)
         })
 
+        this._card.style.backgroundColor = 'pink'
     }
-
 }
 
 function addVisit() {
-    switch (select.options[select.selectedIndex].dataset.name) {
-        case 'cardiologist':
-            // new CardiologistVisit(name.value, date.value, reason.value)
-            form.style.display = 'none'
-            break;
-        case 'dentist':
-            // new DentistVisit(name.value, date.value, reason.value)
-            form.style.display = 'none'
-            break;
-        case 'therapist':
-            // new TherapistVisit(name.value, date.value, reason.value)
-            form.style.display = 'none'
-            break;
-    }
+
+    const fields = document.querySelectorAll('.form__input')
+
+    if ([...fields].some(item => !item.value)) {
+        fields.forEach(item => {
+            if (!item.value) {
+                item.style.border = '2px solid red'
+                item.placeholder = 'Заполните это поле'
+            } else item.style.border = ''
+        })
+    } else
+
+        switch (selectedOption.dataset.name) {
+
+            case 'cardiologist':
+                new CardiologistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, pressure.value, diseases.value, textarea.value)
+                form.classList.toggle('form--hidden')
+                console.log(mainContent.childNodes);
+
+                break;
+            case 'dentist':
+                new DentistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value, textarea.value)
+                form.classList.toggle('form--hidden')
+                console.log(mainContent);
+                break;
+
+            case 'therapist':
+                new TherapistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, textarea.value)
+                form.classList.toggle('form--hidden')
+                console.log(mainContent);
+                break;
+        }
 }
 
 createNewVisitBtn.addEventListener('click', addVisit)
-// createNewVisitBtn.addEventListener('click', (e) => {
 
-//     // let inputName = document.querySelector('#name').value
-//     // let inputDate = document.querySelector('#date').value
-//     // let lastVisit = document.querySelector('#last-visit').value
-//     // let visitReason = document.querySelector('#reason').value
-//     // let textArea = document.querySelector('#text-area').value
-//     // let doctorsName = select.options[select.selectedIndex].value
-//     // console.log('doctorsName', doctorsName)
-//     // let inputReason = document.querySelector('#reason').value
-
-//     const options = []
-
-//     let visit = new DentistVisit(inputName, inputDate, lastVisit, visitReason, textArea)
-//     console.log(visit);
-
-//     lStorage.push(visit)
-//     form.style.display = 'none'
-//     console.log(lStorage);
-//     localStorage.setItem('mainContent', JSON.stringify(lStorage))
-//     // input.forEach(item => {
-//     //     if (!item.value) {
-//     //         item.style.border = '2px solid red'
-//     //     }
-//     // })
-
-//     // if ([...input].some(item => !item.value)) {
-//     //     console.log(item);
-//     // }
-
-
-// })
-
-
+// события
 
 openFormBtn.addEventListener('click', () => {
-    form.style.display === 'none' ?
-        form.style.display = '' :
-        form.style.display = 'none'
+    select.options.selectedIndex = 0
+    clearValues(inputs)
+    clearInputs(inputs)
+    textarea.value = ''
+    form.classList.toggle('form--hidden')
+    selectedOption = select.options[select.selectedIndex]
     inputWrapper.forEach(item => {
-        if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
-            item.style.display = 'block'
-        } else
-            item.style.display = 'none'
+        item.remove()
+        if (!item.dataset.name || item.dataset.name.includes(selectedOption.dataset.name)) {
+            form.insertBefore(item, createNewVisitBtn)
+        }
     })
-    // inputWrapper = [...inputWrapper].filter(item => {
-    //     return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
-    // })
-
-    console.log(inputWrapper);
 })
 
-closeBtn.addEventListener('click', (e) => {
-    e.target.parentNode.style.display = 'none'
+closeFormBtn.addEventListener('click', (e) => {
+    e.target.parentNode.classList.toggle('form--hidden')
 })
-
-
 
 select.addEventListener('change', () => {
-    console.log(select.options[select.selectedIndex].dataset.name)
+    selectedOption = select.options[select.selectedIndex]
+
+    clearInputs(inputs)
 
     inputWrapper.forEach(item => {
-        if (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name)) {
-            item.style.display = 'block'
-        } else item.style.display = 'none'
+        item.remove()
+        if (!item.dataset.name || item.dataset.name.includes(selectedOption.dataset.name)) {
+            form.insertBefore(item, createNewVisitBtn)
+        }
     })
-
-    // inputWrapper = [...inputWrapper].filter(item => {
-    //     return (!item.dataset.name || item.dataset.name.includes(select.options[select.selectedIndex].dataset.name))
-    // })
-    // console.log(inputWrapper);
 })
+
+// вспомогательные функции
+
+function clearValues(selector) {
+    selector.forEach(item => item.value = '')
+}
+
+function clearInputs(selector) {
+    selector.forEach(item => {
+        item.style.border = ''
+        item.placeholder = ''
+    })
+}
+
+// drag&drop

@@ -194,8 +194,8 @@ openFormBtn.addEventListener('click', () => {
     })
 })
 
-closeFormBtn.addEventListener('click', (e) => {
-    e.target.parentNode.classList.toggle('form--hidden')
+closeFormBtn.addEventListener('click', () => {
+    form.classList.toggle('form--hidden')
 })
 
 select.addEventListener('change', () => {

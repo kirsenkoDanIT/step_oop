@@ -53,8 +53,11 @@ class Visit {
         this._close.style.top = '5px'
         this._close.style.right = '5px'
 
-        this.removeVisit()
-
+        // this.removeVisit()
+        this._close.addEventListener('click', () => {
+            this._card.remove()
+        })
+        
         this._card.appendChild(this._close)
 
         this._options.forEach(item => {
@@ -82,11 +85,11 @@ class Visit {
 
     }
 
-    removeVisit() {
-        this._close.addEventListener('click', () => {
-            this._card.remove()
-        })
-    }
+    // removeVisit() {
+    //     this._close.addEventListener('click', () => {
+    //         this._card.remove()
+    //     })
+    // }
 }
 
 class TherapistVisit extends Visit {

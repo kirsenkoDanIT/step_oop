@@ -35,6 +35,7 @@ let localSt = {}
 let numberCard = 1
 let zIndexCount = 1
 let localObject
+let margin = 40
 
 // классы
 
@@ -119,8 +120,8 @@ class Visit {
         card.onmousedown = function (e) {
             card.style.zIndex = zIndexCount;
             zIndexCount++
-            card.style.left = getCoords(card).left - getCoords(mainContent).left + 'px'
-            card.style.top = getCoords(card).top - getCoords(mainContent).top + 'px'
+            card.style.left = getCoords(card).left - margin - getCoords(mainContent).left + 'px'
+            card.style.top = getCoords(card).top - margin - getCoords(mainContent).top + 'px'
             console.log('getCoords(card).left', getCoords(card).left)
             card.style.position = 'absolute'
             if (!pseudoActive) {
@@ -141,22 +142,22 @@ class Visit {
             let mainContentCoords = getCoords(mainContent);
 
             document.onmousemove = function (e) {
-                let newLeft = e.pageX - shiftX - mainContentCoords.left;
-                let newTop = e.pageY - shiftY - mainContentCoords.top;
+                let newLeft = e.pageX - shiftX - mainContentCoords.left- margin;
+                let newTop = e.pageY - shiftY - mainContentCoords.top- margin;
 
-                if (newLeft < 0) {
-                    newLeft = 0;
+                if (newLeft < -margin) {
+                    newLeft = -margin;
                 }
                 let rightEdge = mainContent.offsetWidth - card.offsetWidth;
-                if (newLeft > rightEdge) {
-                    newLeft = rightEdge;
+                if (newLeft > rightEdge-margin) {
+                    newLeft = rightEdge-margin;
                 }
-                if (newTop < 0) {
-                    newTop = 0;
+                if (newTop < -margin) {
+                    newTop = -margin;
                 }
                 let topEdge = mainContent.offsetHeight - card.offsetHeight;
-                if (newTop > topEdge) {
-                    newTop = topEdge;
+                if (newTop > topEdge-margin) {
+                    newTop = topEdge-margin;
                 }
 
                 card.style.left = newLeft + 'px';

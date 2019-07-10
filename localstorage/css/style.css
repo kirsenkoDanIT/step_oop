@@ -124,7 +124,7 @@ body {
   height: inherit;
   display: inline-block;
   text-align: center; 
-   /* margin: 40px;  */
+   margin: 40px; 
    /* transform: translatey(122px) translatex(122px) */
 }
 

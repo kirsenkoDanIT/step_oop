@@ -32,9 +32,11 @@ const title = document.querySelector('.main-content__title')
 
 let selectedOption
 
-let localSt = []
+let localSt = {}
 
-
+let numberCard = 1
+let zIndexCount = 1
+let localObject
 
 // классы
 
@@ -45,12 +47,12 @@ class Visit {
         this._visitDate = date
         this._doctor = doctor
         this._textarea = textarea
-        
+
         this._options = [this._fullName, this._visitDate, this._doctor]
 
         this._card = document.createElement('article')
         this._card.className = 'visit-card'
-        this._card.style.minHeight = '100%'
+        // this._card.style.minHeight = '100px'
         this._card.style.position = 'relative'
 
         this._close = document.createElement('button')
@@ -58,6 +60,7 @@ class Visit {
         this._close.style.position = 'absolute'
         this._close.style.top = '5px'
         this._close.style.right = '5px'
+
 
         this.removeVisit()
 
@@ -74,6 +77,7 @@ class Visit {
         this._showMore.innerText = 'show more'
 
         this._card.appendChild(this._showMore)
+        this._showMoreActive = false
 
         // if (this._textarea) {
         // const p = document.createElement('p')
@@ -90,8 +94,71 @@ class Visit {
 
     removeVisit() {
         this._close.addEventListener('click', () => {
+            let pseudoDiv = document.createElement('div')
+            pseudoDiv.style.width = this._card.offsetWidth + 'px'
+            pseudoDiv.style.height = this._card.offsetHeight + 'px'
+            // pseudoDiv.style.backgroundColor= 'red'
+            pseudoDiv.className = ('visit-card')
+            mainContent.insertBefore(pseudoDiv, this._card)
+            
             this._card.remove()
+
+            // mainContent.childElementCount
+
+
+            for (let key in localSt) {
+                if (this._card.querySelectorAll('p')[0].innerText == localSt[key]._fullName && this._card.querySelectorAll('p')[1].innerText == localSt[key]._visitDate) {
+                    delete localSt[key]
+                    localStorage.setItem('cards', JSON.stringify(localSt))
+                }
+            }
+            if (Object.keys(localSt).length == 0) {
+                title.style.display = ''
+            }
         })
+    }
+
+    moveCard() {
+        let card = this._card
+        let shiftX = 0
+        let shiftY = 0
+        let newX
+        let newY
+
+
+        card.onmousedown = function (e) {
+
+            newX = e.pageX
+            newY = e.pageY
+            let newShiftX
+            let newShiftY
+
+            moveAt(e);
+
+            card.style.zIndex = zIndexCount;
+            zIndexCount++
+            function moveAt(e) {
+                card.style.transform = `translateX(${shiftX - (newX - e.pageX)}px) translateY(${shiftY - (newY - e.pageY)}px)`
+            }
+            console.log('card.offsetHeight', card.offsetHeight)
+
+
+            document.onmousemove = function (e) {
+                moveAt(e);
+                newShiftX = shiftX - (newX - e.pageX)
+                newShiftY = shiftY - (newY - e.pageY)
+            }
+            card.onmouseup = function () {
+                document.onmousemove = null;
+                card.onmouseup = null;
+                shiftX = newShiftX
+
+                shiftY = newShiftY
+            }
+            card.ondragstart = function () {
+                return false;
+            };
+        }
     }
 }
 
@@ -108,6 +175,9 @@ class TherapistVisit extends Visit {
         })
 
         this._card.style.backgroundColor = 'yellow'
+
+        this.moveCard()
+
     }
 }
 
@@ -124,6 +194,8 @@ class CardiologistVisit extends Visit {
         })
 
         this._card.style.backgroundColor = '#aff'
+
+        this.moveCard()
     }
 }
 
@@ -140,10 +212,21 @@ class DentistVisit extends Visit {
         })
 
         this._card.style.backgroundColor = 'pink'
+
+        this.moveCard()
     }
 }
 
+function addLocalStorage() {
+    console.log('localSt', localSt)
+    localSt[numberCard] = localObject
+    localStorage.setItem('cards', JSON.stringify(localSt))
+    localStorage.setItem('numberCard', numberCard)
+    numberCard++
+}
+
 function addVisit() {
+
 
     const fields = document.querySelectorAll('.form__input')
 
@@ -154,46 +237,43 @@ function addVisit() {
                 item.placeholder = 'Заполните это поле'
             } else item.style.border = ''
         })
-    } else
+    } else {
+
+        title.style.display = 'none'
 
         switch (selectedOption.dataset.name) {
 
             case 'cardiologist':
-                new CardiologistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, pressure.value, diseases.value)
+                localObject = new CardiologistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, pressure.value, diseases.value)
                 form.classList.toggle('form--hidden')
-                console.log(mainContent.childNodes);
 
-                let arrCardio = [fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, pressure.value, diseases.value]
-                localSt.push(arrCardio)
-                localStorage.setItem('cards', JSON.stringify(localSt))
+                addLocalStorage()
+                // localObject.moveCard()
 
                 break;
             case 'dentist':
-                new DentistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value)
+                localObject = new DentistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value)
                 form.classList.toggle('form--hidden')
-                console.log(mainContent);
 
-                let arrDentist = [fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value]
-                localSt.push(arrDentist)
-                localStorage.setItem('cards', JSON.stringify(localSt))
+                addLocalStorage()
+                // localObject.moveCard()
 
                 break;
 
             case 'therapist':
-                new TherapistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value)
+                localObject = new TherapistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value)
                 form.classList.toggle('form--hidden')
-                console.log(mainContent);
 
-                let arrTherapist = [fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value]
-                localSt.push(arrTherapist)
-                localStorage.setItem('cards', JSON.stringify(localSt))
-                
+                addLocalStorage()
+                // localObject.moveCard()
+
                 break;
         }
+    }
 }
 
-createNewVisitBtn.addEventListener('click', ()=>{
-    
+createNewVisitBtn.addEventListener('click', () => {
+
     addVisit()
 })
 
@@ -245,27 +325,33 @@ function clearInputs(selector) {
 }
 
 
-if(localStorage.cards){
-    let localInputs = JSON.parse(localStorage.getItem('cards'))
-       console.log('localInputs', localInputs)
+if (localStorage.cards) {
+    numberCard = +localStorage.getItem('numberCard')
+    numberCard++
+    localSt = JSON.parse(localStorage.getItem('cards'))
+    if (Object.keys(localSt).length !== 0) {
+        title.style.display = 'none'
+    }
 
-       localInputs.forEach((array)=>{
-           switch (array[2]) {
-       
-               case 'Кардиолог':
-                   new CardiologistVisit(array[0], array[1], array[2], array[3], array[4], array[5], array[6], array[7])
-                   break;
-               case 'Стоматолог':
-                   new DentistVisit(array[0], array[1], array[2], array[3], array[4], array[5])
-                   break;
-       
-               case 'Терапевт':
-                   new TherapistVisit(array[0], array[1], array[2], array[3], array[4], array[5])
-                   break;
-           }
+    for (let key in localSt) {
+        console.log('key', key)
+        switch (localSt[key]._doctor) {
 
-       })
-       
+            case 'Кардиолог':
+                new CardiologistVisit(localSt[key]._fullName, localSt[key]._visitDate, localSt[key]._doctor, localSt[key]._textarea, localSt[key]._args[0], localSt[key]._args[1], localSt[key]._args[2], localSt[key]._args[3])
+                break;
+
+            case 'Стоматолог':
+                new DentistVisit(localSt[key]._fullName, localSt[key]._visitDate, localSt[key]._doctor, localSt[key]._textarea, localSt[key]._args[0], localSt[key]._args[1])
+                break;
+
+            case 'Терапевт':
+                new TherapistVisit(localSt[key]._fullName, localSt[key]._visitDate, localSt[key]._doctor, localSt[key]._textarea, localSt[key]._args[0], localSt[key]._args[1])
+                break;
+        }
+    }
 }
 
+
 // drag&drop
+

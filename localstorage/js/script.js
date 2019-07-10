@@ -27,8 +27,6 @@ const option = document.querySelectorAll('.form__option')
 const inputs = document.querySelectorAll('.form__input')
 const title = document.querySelector('.main-content__title')
 
-// console.log(title);
-// console.log(mainContent.length);
 
 let selectedOption
 
@@ -89,7 +87,6 @@ class Visit {
         // console.log(this._textarea)
 
         mainContent.appendChild(this._card)
-
     }
 
     removeVisit() {
@@ -100,11 +97,8 @@ class Visit {
             // pseudoDiv.style.backgroundColor= 'red'
             pseudoDiv.className = ('visit-card')
             mainContent.insertBefore(pseudoDiv, this._card)
-            
+
             this._card.remove()
-
-            // mainContent.childElementCount
-
 
             for (let key in localSt) {
                 if (this._card.querySelectorAll('p')[0].innerText == localSt[key]._fullName && this._card.querySelectorAll('p')[1].innerText == localSt[key]._visitDate) {
@@ -119,46 +113,77 @@ class Visit {
     }
 
     moveCard() {
-        let card = this._card
-        let shiftX = 0
-        let shiftY = 0
-        let newX
-        let newY
-
+        let card = this._card;
+        let pseudoActive = false
 
         card.onmousedown = function (e) {
-
-            newX = e.pageX
-            newY = e.pageY
-            let newShiftX
-            let newShiftY
-
-            moveAt(e);
-
             card.style.zIndex = zIndexCount;
             zIndexCount++
-            function moveAt(e) {
-                card.style.transform = `translateX(${shiftX - (newX - e.pageX)}px) translateY(${shiftY - (newY - e.pageY)}px)`
-            }
-            console.log('card.offsetHeight', card.offsetHeight)
+            card.style.left = getCoords(card).left - getCoords(mainContent).left + 'px'
+            card.style.top = getCoords(card).top - getCoords(mainContent).top + 'px'
+            console.log('getCoords(card).left', getCoords(card).left)
+            card.style.position = 'absolute'
+            if (!pseudoActive) {
+                let pseudoDiv = document.createElement('div')
+                pseudoDiv.style.width = card.offsetWidth + 'px'
+                pseudoDiv.style.height = card.offsetHeight + 'px'
+                // pseudoDiv.style.backgroundColor= 'red'
+                pseudoDiv.className = ('visit-card')
+                mainContent.insertBefore(pseudoDiv, card)
+                pseudoActive = true
 
+            }
+
+            let cardCoords = getCoords(card);
+            let shiftX = e.pageX - cardCoords.left;
+            let shiftY = e.pageY - cardCoords.top;
+
+            let mainContentCoords = getCoords(mainContent);
 
             document.onmousemove = function (e) {
-                moveAt(e);
-                newShiftX = shiftX - (newX - e.pageX)
-                newShiftY = shiftY - (newY - e.pageY)
-            }
-            card.onmouseup = function () {
-                document.onmousemove = null;
-                card.onmouseup = null;
-                shiftX = newShiftX
+                let newLeft = e.pageX - shiftX - mainContentCoords.left;
+                let newTop = e.pageY - shiftY - mainContentCoords.top;
 
-                shiftY = newShiftY
+                if (newLeft < 0) {
+                    newLeft = 0;
+                }
+                let rightEdge = mainContent.offsetWidth - card.offsetWidth;
+                if (newLeft > rightEdge) {
+                    newLeft = rightEdge;
+                }
+                if (newTop < 0) {
+                    newTop = 0;
+                }
+                let topEdge = mainContent.offsetHeight - card.offsetHeight;
+                if (newTop > topEdge) {
+                    newTop = topEdge;
+                }
+
+                card.style.left = newLeft + 'px';
+                card.style.top = newTop + 'px';
             }
-            card.ondragstart = function () {
-                return false;
+
+            document.onmouseup = function () {
+                document.onmousemove = document.onmouseup = null;
             };
+
+            return false;
+        };
+
+        card.ondragstart = function () {
+            return false;
+        };
+
+        function getCoords(elem) {
+            var box = elem.getBoundingClientRect();
+
+            return {
+                top: box.top + pageYOffset,
+                left: box.left + pageXOffset
+            };
+
         }
+
     }
 }
 
@@ -177,7 +202,6 @@ class TherapistVisit extends Visit {
         this._card.style.backgroundColor = 'yellow'
 
         this.moveCard()
-
     }
 }
 
@@ -352,6 +376,4 @@ if (localStorage.cards) {
     }
 }
 
-
 // drag&drop
-

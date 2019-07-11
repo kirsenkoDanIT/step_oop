@@ -29,17 +29,16 @@ const title = document.querySelector('.main-content__title')
 console.log(JSON.parse(localStorage.getItem('item')));
 
 
-
-
-
-
-
 let selectedOption
 let localStorageArr
 let newCard
 if (localStorage.item) {
     localStorageArr = JSON.parse(localStorage.getItem('item'))
 } else localStorageArr = []
+
+if (localStorageArr.length) {
+    title.style.display = 'none'
+} else title.style.display = ''
 
 // классы
 
@@ -50,19 +49,15 @@ class Visit {
         this._visitDate = date
         this._doctor = doctor
         this._textarea = textarea
+        this._text
 
         this._options = [this._fullName, this._visitDate, this._doctor]
 
         this._card = document.createElement('article')
         this._card.className = 'visit-card'
-        this._card.style.minHeight = '100%'
-        this._card.style.position = 'relative'
 
         this._close = document.createElement('button')
-        this._close.innerText = 'x'
-        this._close.style.position = 'absolute'
-        this._close.style.top = '5px'
-        this._close.style.right = '5px'
+        this._close.className = 'close-btn'
 
         this._card.addEventListener('click', (e) => {
             const articles = document.querySelectorAll('article');
@@ -71,57 +66,48 @@ class Visit {
                     localStorageArr.splice(index, 1)
                     localStorage.setItem('item', JSON.stringify(localStorageArr))
                     this._card.remove()
-
+                    if (localStorageArr.length) {
+                        title.style.display = 'none'
+                    } else title.style.display = ''
                 }
             })
-
         })
 
-
         this._card.appendChild(this._close)
-
-        // this._options.forEach(item => {
-        //     const p = document.createElement('p')
-        //     p.className = 'article__field'
-        //     p.innerHTML = item
-        //     this._card.appendChild(p)
-        // })
 
         this._options.forEach(item => {
             const p = document.createElement('p')
             p.className = 'article__field-main'
-
             p.innerHTML = item
             this._card.appendChild(p)
         })
 
         this._showMore = document.createElement('button')
-        this._showMore.innerText = 'show more'
+        this._showMore.innerText = 'Развернуть'
+        this._showMore.style.margin = '0 auto'
 
         this._card.appendChild(this._showMore)
 
         this._showMore.addEventListener('click', () => {
-
+            console.log(this._card.childNodes)
+            this._card.childNodes.forEach((item) => {
+                if (item.classList.contains('article__field')) {
+                    item.classList.toggle('hide')
+                    this._showMore.innerText === 'Развернуть'? this._showMore.innerText = 'Свернуть': this._showMore.innerText = 'Развернуть'
+                }
+            })
         })
 
-        // if (this._textarea) {
-        // const p = document.createElement('p')
-        // p.className = 'article__text'
-        // p.innerText = this._textarea
-        // this._card.insertBefore(p, this._showMore)
-        // }
-
-        // console.log(this._textarea)
+        if (this._textarea) {
+            this._text = document.createElement('p')
+            this._text.className = 'article__field hide'
+            this._text.innerText = this._textarea
+            this._card.insertBefore(this._text, this._showMore)
+        }
 
         mainContent.appendChild(this._card)
-
     }
 
-    // removeVisit() {
-    //     this._close.addEventListener('click', () => {
-    //         this._card.remove()
-    //     })
-    // }
 }
 
 class TherapistVisit extends Visit {
@@ -134,7 +120,7 @@ class TherapistVisit extends Visit {
             const p = document.createElement('p')
             p.classList = 'article__field hide'
             p.innerHTML = item
-            this._card.insertBefore(p, this._showMore)
+            this._textarea ? this._card.insertBefore(p, this._text) : this._card.insertBefore(p, this._showMore)
         })
 
         this._card.style.backgroundColor = 'yellow'
@@ -154,7 +140,7 @@ class CardiologistVisit extends Visit {
             const p = document.createElement('p')
             p.classList = 'article__field hide'
             p.innerText = item
-            this._card.insertBefore(p, this._showMore)
+            this._textarea ? this._card.insertBefore(p, this._text) : this._card.insertBefore(p, this._showMore)
         })
 
         this._card.style.backgroundColor = 'blue'
@@ -173,7 +159,7 @@ class DentistVisit extends Visit {
             const p = document.createElement('p')
             p.classList = 'article__field hide'
             p.innerHTML = item
-            this._card.insertBefore(p, this._showMore)
+            this._textarea ? this._card.insertBefore(p, this._text) : this._card.insertBefore(p, this._showMore)
         })
 
         this._card.style.backgroundColor = 'pink'
@@ -204,41 +190,38 @@ function addVisit() {
                 item.placeholder = 'Заполните это поле'
             } else item.style.border = ''
         })
-    } else
-
+    } else {
+        title.style.display = 'none'
         switch (selectedOption.dataset.name) {
 
             case 'cardiologist':
-                newCard = new CardiologistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, pressure.value, diseases.value, /*textarea.value*/ )
-                form.classList.toggle('form--hidden')
+                newCard = new CardiologistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, pressure.value, diseases.value)
+                form.classList.toggle('hide')
                 localStorageArr.push(newCard)
                 localStorage.setItem('item', JSON.stringify(localStorageArr))
 
                 break;
             case 'dentist':
-                newCard = new DentistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value, textarea.value)
-                form.classList.toggle('form--hidden')
-
+                newCard = new DentistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value)
+                form.classList.toggle('hide')
                 localStorageArr.push(newCard)
                 localStorage.setItem('item', JSON.stringify(localStorageArr))
-
-                // addLocalStorage()
 
                 break;
 
             case 'therapist':
                 newCard = new TherapistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value)
-                form.classList.toggle('form--hidden')
-                console.log(mainContent);
+                form.classList.toggle('hide')
                 localStorageArr.push(newCard)
                 localStorage.setItem('item', JSON.stringify(localStorageArr))
                 break;
         }
+    }
 }
 
 createNewVisitBtn.addEventListener('click', () => {
     addVisit()
-    // addLocalStorage(mainContent)
+
 })
 
 // события
@@ -248,7 +231,7 @@ openFormBtn.addEventListener('click', () => {
     clearValues(inputs)
     clearInputs(inputs)
     textarea.value = ''
-    form.classList.toggle('form--hidden')
+    form.classList.toggle('hide')
     selectedOption = select.options[select.selectedIndex]
     inputWrapper.forEach(item => {
         item.remove()
@@ -259,7 +242,7 @@ openFormBtn.addEventListener('click', () => {
 })
 
 closeFormBtn.addEventListener('click', () => {
-    form.classList.toggle('form--hidden')
+    form.classList.toggle('hide')
 })
 
 select.addEventListener('change', () => {
@@ -287,21 +270,5 @@ function clearInputs(selector) {
         item.placeholder = ''
     })
 }
-
-// mainContent.addEventListener("change", ()=>{
-//     console.log(mainContent);
-// });
-
-
-function addLocalStorage() {
-
-    localStorage.setItem('item', mainContent.innerHTML)
-    console.log(typeof mainContent)
-}
-
-function getLocalStorage() {
-    // localStorage.getItem('item', mainContent.innerHTML)
-}
-
 
 // drag&drop

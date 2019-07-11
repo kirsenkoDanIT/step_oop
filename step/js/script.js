@@ -188,22 +188,19 @@ function addVisit() {
             case 'cardiologist':
                 newCard = new CardiologistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value, pressure.value, diseases.value)
                 form.classList.toggle('hide')
-                localStorageArr.push(newCard)
-                localStorage.setItem('item', JSON.stringify(localStorageArr))
+                addToLocalStorage()
                 break;
 
             case 'dentist':
                 newCard = new DentistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value)
                 form.classList.toggle('hide')
-                localStorageArr.push(newCard)
-                localStorage.setItem('item', JSON.stringify(localStorageArr))
+                addToLocalStorage()
                 break;
 
             case 'therapist':
                 newCard = new TherapistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, age.value)
                 form.classList.toggle('hide')
-                localStorageArr.push(newCard)
-                localStorage.setItem('item', JSON.stringify(localStorageArr))
+                addToLocalStorage()
                 break;
         }
     }
@@ -264,6 +261,11 @@ function filterFormFields() {
             form.insertBefore(item, createNewVisitBtn)
         }
     })
+}
+
+function addToLocalStorage() {
+    localStorageArr.push(newCard)
+    localStorage.setItem('item', JSON.stringify(localStorageArr))
 }
 
 // drag&drop

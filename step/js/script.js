@@ -29,6 +29,7 @@ const title = document.querySelector('.main-content__title')
 let selectedOption
 let localStorageArr
 let newCard
+
 if (localStorage.item) {
     localStorageArr = JSON.parse(localStorage.getItem('item'))
 } else localStorageArr = []

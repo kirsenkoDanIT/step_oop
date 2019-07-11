@@ -156,12 +156,15 @@ class DentistVisit extends Visit {
 
 localStorageArr.forEach(item => {
     switch (item._doctor) {
+        
         case 'Кардиолог':
             new CardiologistVisit(item._fullName, item._visitDate, item._doctor, item._textarea, item._reason, item._age, item._pressure, item._diseases)
             break;
+
         case 'Стоматолог':
             new DentistVisit(item._fullName, item._visitDate, item._doctor, item._textarea, item._reason, item._lastVisitDate)
             break;
+
         case 'Терапевт':
             new TherapistVisit(item._fullName, item._visitDate, item._doctor, item._textarea, item._reason, item._age)
     }
@@ -180,7 +183,7 @@ function addVisit() {
         })
     } else {
         title.style.display = 'none'
-        
+
         switch (selectedOption.dataset.name) {
 
             case 'cardiologist':
@@ -188,14 +191,13 @@ function addVisit() {
                 form.classList.toggle('hide')
                 localStorageArr.push(newCard)
                 localStorage.setItem('item', JSON.stringify(localStorageArr))
-
                 break;
+
             case 'dentist':
                 newCard = new DentistVisit(fullName.value, visitDate.value, selectedOption.value, textarea.value, reason.value, lastVisitDate.value)
                 form.classList.toggle('hide')
                 localStorageArr.push(newCard)
                 localStorage.setItem('item', JSON.stringify(localStorageArr))
-
                 break;
 
             case 'therapist':

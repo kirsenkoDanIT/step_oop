@@ -39,7 +39,6 @@ hideTitle()
 
 class Visit {
     constructor(name, date, doctor, textarea) {
-        textarea
         this._fullName = name
         this._visitDate = date
         this._doctor = doctor
@@ -156,7 +155,7 @@ class DentistVisit extends Visit {
 
 localStorageArr.forEach(item => {
     switch (item._doctor) {
-        
+
         case 'Кардиолог':
             new CardiologistVisit(item._fullName, item._visitDate, item._doctor, item._textarea, item._reason, item._age, item._pressure, item._diseases)
             break;

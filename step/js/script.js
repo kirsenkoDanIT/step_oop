@@ -180,6 +180,7 @@ function addVisit() {
         })
     } else {
         title.style.display = 'none'
+        
         switch (selectedOption.dataset.name) {
 
             case 'cardiologist':

@@ -25,9 +25,6 @@ const option = document.querySelectorAll('.form__option')
 const inputs = document.querySelectorAll('.form__input')
 const title = document.querySelector('.main-content__title')
 
-// console.log(title);
-console.log(JSON.parse(localStorage.getItem('item')));
-
 
 let selectedOption
 let localStorageArr
@@ -36,9 +33,7 @@ if (localStorage.item) {
     localStorageArr = JSON.parse(localStorage.getItem('item'))
 } else localStorageArr = []
 
-if (localStorageArr.length) {
-    title.style.display = 'none'
-} else title.style.display = ''
+hideTitle()
 
 // классы
 
@@ -67,9 +62,7 @@ class Visit {
                     localStorageArr.splice(index, 1)
                     localStorage.setItem('item', JSON.stringify(localStorageArr))
                     this._card.remove()
-                    if (localStorageArr.length) {
-                        title.style.display = 'none'
-                    } else title.style.display = ''
+                    hideTitle()
                 }
             })
         })
@@ -90,7 +83,6 @@ class Visit {
         this._card.appendChild(this._showMore)
 
         this._showMore.addEventListener('click', () => {
-            console.log(this._card.childNodes)
             this._card.childNodes.forEach((item) => {
                 if (item.classList.contains('article__field')) {
                     item.classList.toggle('hide')
@@ -217,7 +209,6 @@ function addVisit() {
 
 createNewVisitBtn.addEventListener('click', () => {
     addVisit()
-
 })
 
 // события
@@ -229,12 +220,8 @@ openFormBtn.addEventListener('click', () => {
     textarea.value = ''
     form.classList.toggle('hide')
     selectedOption = select.options[select.selectedIndex]
-    inputWrapper.forEach(item => {
-        item.remove()
-        if (!item.dataset.name || item.dataset.name.includes(selectedOption.dataset.name)) {
-            form.insertBefore(item, createNewVisitBtn)
-        }
-    })
+
+    filterFormFields()
 })
 
 closeFormBtn.addEventListener('click', () => {
@@ -246,12 +233,7 @@ select.addEventListener('change', () => {
 
     clearInputs(inputs)
 
-    inputWrapper.forEach(item => {
-        item.remove()
-        if (!item.dataset.name || item.dataset.name.includes(selectedOption.dataset.name)) {
-            form.insertBefore(item, createNewVisitBtn)
-        }
-    })
+    filterFormFields()
 })
 
 // вспомогательные функции
@@ -264,6 +246,21 @@ function clearInputs(selector) {
     selector.forEach(item => {
         item.style.border = ''
         item.placeholder = ''
+    })
+}
+
+function hideTitle() {
+    if (localStorageArr.length) {
+        title.style.display = 'none'
+    } else title.style.display = ''
+}
+
+function filterFormFields() {
+    inputWrapper.forEach(item => {
+        item.remove()
+        if (!item.dataset.name || item.dataset.name.includes(selectedOption.dataset.name)) {
+            form.insertBefore(item, createNewVisitBtn)
+        }
     })
 }
 

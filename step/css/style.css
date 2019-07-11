@@ -3,7 +3,8 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: sans-serif;  
+  background-color: rgb(226, 231, 227);  
 }
 
 .wrap {
@@ -19,7 +20,7 @@ body {
   padding: 20px;
   align-items: center;
   justify-content: space-between;
-  background-color: #0000002e;
+  background-color: rgb(222, 240, 189);
 }
 
 .page-header__img {
@@ -31,7 +32,30 @@ body {
   outline: none;
   padding: 10px 20px;
   border-radius: 5px;
-  border: 2px solid #000;
+  border: none;
+  background-color: rgb(204, 159, 190);
+  filter: drop-shadow(3px 3px 5px rgb(170, 154, 228));
+  
+}
+
+.pencil {
+  object-fit: contain;
+  height: 800px;
+  width: 600px;
+  transform: rotate(326deg);
+  margin-left: 180px;
+  margin-top: -510px;
+  object-position: bottom;
+}
+
+.dirt {
+  height: 100px;
+}
+
+.best-doctors{
+  font-size: 40px;
+  color: rgb(131, 155, 137);
+  text-transform: uppercase;
 }
 
 .form {
@@ -41,7 +65,7 @@ body {
   align-items: center;
   width: 500px;
   min-height: 150px;
-  background-color: #eee;
+  background-color: rgb(222, 240, 189);
   border-radius: 20px;
   padding: 10px 20px;
   position: fixed;
@@ -88,26 +112,37 @@ body {
   height: 20px;
 }
 
+.show-more {
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  border: none;
+  filter: drop-shadow(3px 3px 5px rgb(0, 0, 0));
+  width: 120px;
+}
+
 .main-content {
   position: relative;
   margin-top: 10px;
-  min-height: 100vh;
-  background-color: #0000002e;
-  padding: 5px;
+  min-height: 70vh;
+  background-color: rgb(131, 155, 137);
+  padding: 25px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: min-content;
-  grid-gap: 5px;
+  grid-gap: 25px;
   align-content: flex-start;
   grid-auto-flow: row;
 }
 
 .visit-card {
+  cursor: pointer;
   position: relative;
-  padding: 5px;
+  padding: 10px;
   align-self: flex-start;
   display: flex;
   flex-direction: column;
+  width: 200px;
+  border-radius: 10px;
 }
 
 .article__field-main,

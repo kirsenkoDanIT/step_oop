@@ -29,6 +29,7 @@ const title = document.querySelector('.main-content__title')
 let selectedOption
 let localStorageArr
 let newCard
+let zIndexCount = 1
 
 if (localStorage.item) {
     localStorageArr = JSON.parse(localStorage.getItem('item'))
@@ -79,6 +80,7 @@ class Visit {
         this._showMore = document.createElement('button')
         this._showMore.innerText = 'Развернуть'
         this._showMore.style.margin = '0 auto'
+        this._showMore.classList.add('show-more')
 
         this._card.appendChild(this._showMore)
 
@@ -110,7 +112,9 @@ class Visit {
         })
     }
 
+
 }
+
 
 class TherapistVisit extends Visit {
     constructor(name, date, doctor, textarea, reason, age) {
@@ -122,6 +126,7 @@ class TherapistVisit extends Visit {
         this.addFields()
 
         this._card.style.backgroundColor = 'yellow'
+        moveCard(this._card)
     }
 }
 
@@ -136,7 +141,8 @@ class CardiologistVisit extends Visit {
 
         this.addFields()
 
-        this._card.style.backgroundColor = 'blue'
+        this._card.style.backgroundColor = '#aff'
+        moveCard(this._card)
     }
 }
 
@@ -151,6 +157,7 @@ class DentistVisit extends Visit {
         this.addFields()
 
         this._card.style.backgroundColor = 'pink'
+        moveCard(this._card)
     }
 }
 
@@ -270,3 +277,69 @@ function addToLocalStorage() {
 }
 
 // drag&drop
+
+function moveCard(card) {
+    let pseudoActive = false
+    let margin = 0
+
+    card.onmousedown = function (e) {
+        card.style.zIndex = zIndexCount;
+        zIndexCount++
+        card.style.left = getCoords(card).left - margin - getCoords(mainContent).left + 'px'
+        card.style.top = getCoords(card).top - margin - getCoords(mainContent).top + 'px'
+        console.log('getCoords(card).left', getCoords(card).left)
+        card.style.position = 'absolute'
+        if (!pseudoActive) {
+            let pseudoDiv = document.createElement('div')
+            pseudoDiv.style.width = card.offsetWidth + 'px'
+            pseudoDiv.style.height = card.offsetHeight + 'px'
+            pseudoDiv.className = ('visit-card')
+            mainContent.insertBefore(pseudoDiv, card)
+            pseudoActive = true
+        }
+        let cardCoords = getCoords(card);
+        let shiftX = e.pageX - cardCoords.left;
+        let shiftY = e.pageY - cardCoords.top;
+        let mainContentCoords = getCoords(mainContent);
+
+        document.onmousemove = function (e) {
+            let newLeft = e.pageX - shiftX - mainContentCoords.left - margin;
+            let newTop = e.pageY - shiftY - mainContentCoords.top - margin;
+
+            if (newLeft < -margin) {
+                newLeft = -margin;
+            }
+            let rightEdge = mainContent.offsetWidth - card.offsetWidth;
+            if (newLeft > rightEdge - margin) {
+                newLeft = rightEdge - margin;
+            }
+            if (newTop < -margin) {
+                newTop = -margin;
+            }
+            let topEdge = mainContent.offsetHeight - card.offsetHeight;
+            if (newTop > topEdge - margin) {
+                newTop = topEdge - margin;
+            }
+            card.style.left = newLeft + 'px';
+            card.style.top = newTop + 'px';
+        }
+        document.onmouseup = function () {
+            document.onmousemove = document.onmouseup = null;
+        };
+
+        return false;
+    };
+
+    card.ondragstart = function () {
+        return false;
+    };
+
+    function getCoords(elem) {
+        var box = elem.getBoundingClientRect();
+
+        return {
+            top: box.top + pageYOffset,
+            left: box.left + pageXOffset
+        };
+    }
+}

@@ -50,6 +50,7 @@ class Visit {
         this._doctor = doctor
         this._textarea = textarea
         this._text
+        this._args
 
         this._options = [this._fullName, this._visitDate, this._doctor]
 
@@ -108,6 +109,15 @@ class Visit {
         mainContent.appendChild(this._card)
     }
 
+    addFields() {
+        this._args.forEach(item => {
+            const p = document.createElement('p')
+            p.classList = 'article__field hide'
+            p.innerHTML = item
+            this._textarea ? this._card.insertBefore(p, this._text) : this._card.insertBefore(p, this._showMore)
+        })
+    }
+
 }
 
 class TherapistVisit extends Visit {
@@ -116,12 +126,8 @@ class TherapistVisit extends Visit {
         this._reason = reason
         this._age = age
         this._args = [this._reason, this._age]
-        this._args.forEach(item => {
-            const p = document.createElement('p')
-            p.classList = 'article__field hide'
-            p.innerHTML = item
-            this._textarea ? this._card.insertBefore(p, this._text) : this._card.insertBefore(p, this._showMore)
-        })
+
+        this.addFields()
 
         this._card.style.backgroundColor = 'yellow'
     }
@@ -136,12 +142,7 @@ class CardiologistVisit extends Visit {
         this._diseases = diseases
         this._args = [this._reason, this._age, this._pressure, this._diseases]
 
-        this._args.forEach(item => {
-            const p = document.createElement('p')
-            p.classList = 'article__field hide'
-            p.innerText = item
-            this._textarea ? this._card.insertBefore(p, this._text) : this._card.insertBefore(p, this._showMore)
-        })
+        this.addFields()
 
         this._card.style.backgroundColor = 'blue'
     }
@@ -155,12 +156,7 @@ class DentistVisit extends Visit {
 
         this._args = [this._reason, this._lastVisitDate]
 
-        this._args.forEach(item => {
-            const p = document.createElement('p')
-            p.classList = 'article__field hide'
-            p.innerHTML = item
-            this._textarea ? this._card.insertBefore(p, this._text) : this._card.insertBefore(p, this._showMore)
-        })
+        this.addFields()
 
         this._card.style.backgroundColor = 'pink'
     }

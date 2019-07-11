@@ -93,14 +93,14 @@ class Visit {
             this._card.childNodes.forEach((item) => {
                 if (item.classList.contains('article__field')) {
                     item.classList.toggle('hide')
-                    this._showMore.innerText === 'Развернуть'? this._showMore.innerText = 'Свернуть': this._showMore.innerText = 'Развернуть'
+                    this._showMore.innerText === 'Развернуть' ? this._showMore.innerText = 'Свернуть' : this._showMore.innerText = 'Развернуть'
                 }
             })
         })
 
         if (this._textarea) {
             this._text = document.createElement('p')
-            this._text.className = 'article__field hide'
+            this._text.classList = 'article__field hide'
             this._text.innerText = this._textarea
             this._card.insertBefore(this._text, this._showMore)
         }

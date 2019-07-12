@@ -3,8 +3,7 @@
 }
 
 body {
-  font-family: sans-serif;  
-  background-color: rgb(226, 231, 227);  
+  font-family: sans-serif;
 }
 
 .wrap {
@@ -17,13 +16,14 @@ body {
 
 .page-header {
   display: flex;
-  padding: 20px;
+  padding: 10px 15px 10px 30px;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(222, 240, 189);
+  background-color: rgb(61, 38, 38);
 }
 
 .page-header__img {
+  display: block;
   width: 100px;
   height: auto;
 }
@@ -32,30 +32,23 @@ body {
   outline: none;
   padding: 10px 20px;
   border-radius: 5px;
-  border: none;
-  background-color: rgb(204, 159, 190);
-  filter: drop-shadow(3px 3px 5px rgb(170, 154, 228));
-  
+  border: 2px solid #fff;
+  background-color: inherit;
+  font-weight: bold;
+  color: #fff;
 }
 
-.pencil {
-  object-fit: contain;
-  height: 800px;
-  width: 600px;
-  transform: rotate(326deg);
-  margin-left: 180px;
-  margin-top: -510px;
-  object-position: bottom;
+.btn:hover {
+  background-color: #fff;
+  color: rgb(61, 38, 38);
+
 }
 
-.dirt {
-  height: 100px;
-}
-
-.best-doctors{
+.page-header__title {
   font-size: 40px;
-  color: rgb(131, 155, 137);
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 .form {
@@ -64,15 +57,16 @@ body {
   flex-direction: column;
   align-items: center;
   width: 500px;
-  min-height: 150px;
-  background-color: rgb(222, 240, 189);
+  background-color: rgb(61, 38, 38);
+  border: 2px solid #fff;
   border-radius: 20px;
-  padding: 10px 20px;
+  padding: 20px 20px;
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
+  color: #fff;
 }
 
 .form__select {
@@ -103,28 +97,25 @@ body {
   top: 10px;
   border: none;
   outline: none;
-  background-image: url(../img/close.png);
+  background-image: url(../img/close2.png);
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 
-.show-more {
-  background-color: rgb(255, 255, 255);
-  border-radius: 4px;
-  border: none;
-  filter: drop-shadow(3px 3px 5px rgb(0, 0, 0));
-  width: 120px;
+.btn--padding {
+  min-width: 120px;
+  padding: 5px 0;
 }
 
 .main-content {
   position: relative;
   margin-top: 10px;
-  min-height: 70vh;
-  background-color: rgb(131, 155, 137);
+  min-height: 100vh;
+  background-color: rgba(61, 38, 38, 0.4);
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -143,6 +134,11 @@ body {
   flex-direction: column;
   width: 228px;
   border-radius: 5px;
+  color: #fff;
+}
+
+.visit-card--border{
+  border: 1px solid #fff;
 }
 
 .article__field-main,

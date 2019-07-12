@@ -32,9 +32,9 @@ let newCard
 
 if (localStorage.item) {
     localStorageArr = JSON.parse(localStorage.getItem('item'))
+    hideTitle()
 } else localStorageArr = []
 
-hideTitle()
 
 // классы
 
@@ -50,7 +50,7 @@ class Visit {
         this._options = [this._fullName, this._visitDate, this._doctor]
 
         this._card = document.createElement('article')
-        this._card.className = 'visit-card'
+        this._card.classList = 'visit-card  visit-card--border'
 
         this._close = document.createElement('button')
         this._close.className = 'close-btn'
@@ -79,17 +79,16 @@ class Visit {
         this._showMore = document.createElement('button')
         this._showMore.innerText = 'Развернуть'
         this._showMore.style.margin = '0 auto'
-        this._showMore.classList.add('show-more')
-
+        this._showMore.classList = 'btn btn--padding'
         this._card.appendChild(this._showMore)
 
         this._showMore.addEventListener('click', () => {
             this._card.childNodes.forEach((item) => {
                 if (item.classList.contains('article__field')) {
                     item.classList.toggle('hide')
-                    this._showMore.innerText === 'Развернуть' ? this._showMore.innerText = 'Свернуть' : this._showMore.innerText = 'Развернуть'
                 }
             })
+            this._showMore.innerText === 'Развернуть' ? this._showMore.innerText = 'Свернуть' : this._showMore.innerText = 'Развернуть'
         })
 
         if (this._textarea) {
@@ -100,6 +99,8 @@ class Visit {
         }
 
         mainContent.appendChild(this._card)
+
+        moveCard(this._card)
     }
 
     addFields() {
@@ -110,6 +111,7 @@ class Visit {
             this._textarea ? this._card.insertBefore(p, this._text) : this._card.insertBefore(p, this._showMore)
         })
     }
+
 
 
 }
@@ -124,8 +126,7 @@ class TherapistVisit extends Visit {
 
         this.addFields()
 
-        this._card.style.backgroundColor = 'yellow'
-        // moveCard(this._card)
+        this._card.style.backgroundColor = 'rgb(61, 38, 38)'
     }
 }
 
@@ -140,8 +141,7 @@ class CardiologistVisit extends Visit {
 
         this.addFields()
 
-        this._card.style.backgroundColor = '#aff'
-        // moveCard(this._card)
+        this._card.style.backgroundColor = 'rgb(101, 38, 38)'
     }
 }
 
@@ -155,8 +155,7 @@ class DentistVisit extends Visit {
 
         this.addFields()
 
-        this._card.style.backgroundColor = 'pink'
-        // moveCard(this._card)
+        this._card.style.backgroundColor = 'rgb(141, 38, 38)'
     }
 }
 
@@ -342,7 +341,7 @@ function moveCard(card) {
     };
 
     function getCoords(elem) {
-        var box = elem.getBoundingClientRect();
+        let box = elem.getBoundingClientRect();
 
         return {
             top: box.top + pageYOffset,

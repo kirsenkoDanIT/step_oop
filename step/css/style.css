@@ -125,11 +125,11 @@ body {
   margin-top: 10px;
   min-height: 70vh;
   background-color: rgb(131, 155, 137);
-  padding: 25px;
+  padding: 10px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: min-content;
-  grid-gap: 25px;
+  grid-gap: 10px;
   align-content: flex-start;
   grid-auto-flow: row;
 }
@@ -141,8 +141,8 @@ body {
   align-self: flex-start;
   display: flex;
   flex-direction: column;
-  width: 200px;
-  border-radius: 10px;
+  width: 228px;
+  border-radius: 5px;
 }
 
 .article__field-main,

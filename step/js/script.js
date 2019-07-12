@@ -29,7 +29,6 @@ const title = document.querySelector('.main-content__title')
 let selectedOption
 let localStorageArr
 let newCard
-let zIndexCount = 1
 
 if (localStorage.item) {
     localStorageArr = JSON.parse(localStorage.getItem('item'))
@@ -126,7 +125,7 @@ class TherapistVisit extends Visit {
         this.addFields()
 
         this._card.style.backgroundColor = 'yellow'
-        moveCard(this._card)
+        // moveCard(this._card)
     }
 }
 
@@ -142,7 +141,7 @@ class CardiologistVisit extends Visit {
         this.addFields()
 
         this._card.style.backgroundColor = '#aff'
-        moveCard(this._card)
+        // moveCard(this._card)
     }
 }
 
@@ -157,7 +156,7 @@ class DentistVisit extends Visit {
         this.addFields()
 
         this._card.style.backgroundColor = 'pink'
-        moveCard(this._card)
+        // moveCard(this._card)
     }
 }
 
@@ -276,15 +275,23 @@ function addToLocalStorage() {
     localStorage.setItem('item', JSON.stringify(localStorageArr))
 }
 
+function counter() {
+    let index = 0
+    return function () {
+        index++
+        return index
+    }
+}
+
 // drag&drop
+const count = counter()
 
 function moveCard(card) {
     let pseudoActive = false
     let margin = 0
 
     card.onmousedown = function (e) {
-        card.style.zIndex = zIndexCount;
-        zIndexCount++
+        card.style.zIndex = count();
         card.style.left = getCoords(card).left - margin - getCoords(mainContent).left + 'px'
         card.style.top = getCoords(card).top - margin - getCoords(mainContent).top + 'px'
         console.log('getCoords(card).left', getCoords(card).left)

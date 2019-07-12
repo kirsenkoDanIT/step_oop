@@ -35,7 +35,6 @@ if (localStorage.item) {
     hideTitle()
 } else localStorageArr = []
 
-
 // классы
 
 class Visit {
@@ -111,11 +110,7 @@ class Visit {
             this._textarea ? this._card.insertBefore(p, this._text) : this._card.insertBefore(p, this._showMore)
         })
     }
-
-
-
 }
-
 
 class TherapistVisit extends Visit {
     constructor(name, date, doctor, textarea, reason, age) {
@@ -235,9 +230,7 @@ closeFormBtn.addEventListener('click', () => {
 
 select.addEventListener('change', () => {
     selectedOption = select.options[select.selectedIndex]
-
     clearInputs(inputs)
-
     filterFormFields()
 })
 
@@ -293,7 +286,6 @@ function moveCard(card) {
         card.style.zIndex = count();
         card.style.left = getCoords(card).left - margin - getCoords(mainContent).left + 'px'
         card.style.top = getCoords(card).top - margin - getCoords(mainContent).top + 'px'
-        console.log('getCoords(card).left', getCoords(card).left)
         card.style.position = 'absolute'
         if (!pseudoActive) {
             let pseudoDiv = document.createElement('div')

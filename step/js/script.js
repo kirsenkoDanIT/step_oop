@@ -35,6 +35,12 @@ if (localStorage.item) {
     hideTitle()
 } else localStorageArr = []
 
+document.addEventListener('click', (e) => {
+    if (!form.contains(e.target)) {
+        form.classList.add('hide')
+    }
+})
+
 // классы
 
 class Visit {
@@ -44,7 +50,10 @@ class Visit {
         this._doctor = doctor
         this._textarea = textarea
         this._text
-        this._args
+
+    }
+
+    createCard() {
 
         this._options = [this._fullName, this._visitDate, this._doctor]
 
@@ -100,9 +109,8 @@ class Visit {
         mainContent.appendChild(this._card)
 
         moveCard(this._card)
-    }
 
-    addFields() {
+
         this._args.forEach(item => {
             const p = document.createElement('p')
             p.classList = 'article__field hide'
@@ -119,7 +127,7 @@ class TherapistVisit extends Visit {
         this._age = age
         this._args = [this._reason, this._age]
 
-        this.addFields()
+        this.createCard()
 
         this._card.style.backgroundColor = 'rgb(61, 38, 38)'
     }
@@ -134,7 +142,7 @@ class CardiologistVisit extends Visit {
         this._diseases = diseases
         this._args = [this._reason, this._age, this._pressure, this._diseases]
 
-        this.addFields()
+        this.createCard()
 
         this._card.style.backgroundColor = 'rgb(101, 38, 38)'
     }
@@ -148,7 +156,7 @@ class DentistVisit extends Visit {
 
         this._args = [this._reason, this._lastVisitDate]
 
-        this.addFields()
+        this.createCard()
 
         this._card.style.backgroundColor = 'rgb(141, 38, 38)'
     }
@@ -213,7 +221,8 @@ createNewVisitBtn.addEventListener('click', () => {
 
 // события
 
-openFormBtn.addEventListener('click', () => {
+openFormBtn.addEventListener('click', (e) => {
+    e.stopPropagation()
     select.options.selectedIndex = 0
     clearValues(inputs)
     clearInputs(inputs)

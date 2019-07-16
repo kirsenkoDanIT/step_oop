@@ -55,7 +55,7 @@ class Visit {
 
     createCard() {
 
-        this._options = [this._fullName, this._visitDate, this._doctor]
+        this._options = [`ФИО: ${this._fullName}`, `Дата визита: ${this._visitDate}`, `Врач: ${this._doctor}`]
 
         this._card = document.createElement('article')
         this._card.classList = 'visit-card  visit-card--border'
@@ -125,7 +125,7 @@ class TherapistVisit extends Visit {
         super(name, date, doctor, textarea)
         this._reason = reason
         this._age = age
-        this._args = [this._reason, this._age]
+        this._args = [`Цель визита: ${this._reason}`, `Возраст: ${this._age}`]
 
         this.createCard()
 
@@ -140,7 +140,7 @@ class CardiologistVisit extends Visit {
         this._age = age
         this._pressure = pressure
         this._diseases = diseases
-        this._args = [this._reason, this._age, this._pressure, this._diseases]
+        this._args = [`Цель визита: ${this._reason}`, `Возраст: ${this._age}`, `Давление: ${this._pressure}`, `Перенесенные заболевания: ${this._diseases}`]
 
         this.createCard()
 
@@ -154,7 +154,7 @@ class DentistVisit extends Visit {
         this._reason = reason
         this._lastVisitDate = lastVisitDate
 
-        this._args = [this._reason, this._lastVisitDate]
+        this._args = [`Цель визита: ${this._reason}`, `Последний визит: ${this._lastVisitDate}`]
 
         this.createCard()
 
